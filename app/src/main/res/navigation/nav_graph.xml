@@ -18,5 +18,14 @@
         android:id="@+id/onboarding2Fragment"
         android:name="com.example.babytracker.ui.onboarding.Onboarding2Fragment"
         android:label="fragment_onboarding2"
-        tools:layout="@layout/fragment_onboarding2" />
+        tools:layout="@layout/fragment_onboarding2" >
+        <action
+            android:id="@+id/action_onboarding2Fragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.babytracker.ui.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
 </navigation>
