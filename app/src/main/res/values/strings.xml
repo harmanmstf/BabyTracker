@@ -5,4 +5,8 @@
     <string name="title_onboarding1">Track Your Baby\'s Activities with Ease</string>
     <string name="description_onboarding1">Get started with tracking your baby\'s \nfeedings, diaper changes, sleep patterns,\n and more…</string>
     <string name="next">Next</string>
+    <string name="title_onboarding2">Stay Connected with Caregivers</string>
+    <string name="description_onboarding2">Share access to your baby\'s tracker with\n family members, babysitters,\n or healthcare providers </string>
+
+
 </resources>

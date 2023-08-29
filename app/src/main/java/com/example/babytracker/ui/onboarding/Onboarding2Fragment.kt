@@ -5,40 +5,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.example.babytracker.R
 import com.example.babytracker.databinding.FragmentOnboarding1Binding
+import com.example.babytracker.databinding.FragmentOnboarding2Binding
 
 
-class Onboarding1Fragment : Fragment() {
+class Onboarding2Fragment : Fragment() {
 
-    private var _binding: FragmentOnboarding1Binding? = null
+    private var _binding: FragmentOnboarding2Binding? = null
     private val binding get() = _binding!!
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        _binding = FragmentOnboarding1Binding.inflate(inflater, container, false)
+        _binding = FragmentOnboarding2Binding.inflate(inflater, container, false)
         return binding.root
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.btnNext.setOnClickListener {
-            findNavController().navigate(R.id.action_onboarding1Fragment_to_onboarding2Fragment)
-        }
-    }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 
 
 }
