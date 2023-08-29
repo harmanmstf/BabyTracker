@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Baby Tracker</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_onboarding1">Track Your Baby\'s Activities with Ease</string>
+    <string name="description_onboarding1">Get started with tracking your baby\'s \nfeedings, diaper changes, sleep patterns,\n and more…</string>
+    <string name="next">Next</string>
+</resources>
