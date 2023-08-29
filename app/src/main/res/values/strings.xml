@@ -11,6 +11,13 @@
     <string name="feeding">Feeding</string>
     <string name="sleep">Sleep</string>
     <string name="symptoms">Symptoms</string>
+    <string name="settings">Settings</string>
+    <string name="get_premium">Get Premium</string>
+    <string name="rate_us">Rate Us</string>
+    <string name="terms_of_use">Terms of Use</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="restore_purchase">Restore Purchase</string>
 
 
 </resources>
