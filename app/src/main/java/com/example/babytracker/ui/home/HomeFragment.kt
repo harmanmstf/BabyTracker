@@ -33,6 +33,10 @@ class HomeFragment : Fragment() {
         binding.btnFeeding.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_feedingFragment)
         }
+
+        binding.btnSleep.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_sleepFragment)
+        }
     }
 
     override fun onDestroyView() {

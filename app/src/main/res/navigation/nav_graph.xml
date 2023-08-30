@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_homeFragment_to_feedingFragment"
             app:destination="@id/feedingFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_sleepFragment"
+            app:destination="@id/sleepFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -45,4 +48,9 @@
         android:name="com.example.babytracker.ui.feeding.FeedingFragment"
         android:label="fragment_feeding"
         tools:layout="@layout/fragment_feeding" />
+    <fragment
+        android:id="@+id/sleepFragment"
+        android:name="com.example.babytracker.ui.sleep.SleepFragment"
+        android:label="fragment_sleep"
+        tools:layout="@layout/fragment_sleep" />
 </navigation>

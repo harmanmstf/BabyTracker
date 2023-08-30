@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.sleep.SleepFragment">
+
+
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/btn_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvSleep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sleep"
+        android:textAppearance="@style/titles"
+        app:layout_constraintBottom_toBottomOf="@id/btnBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btnBack" />
+
+    <View
+        android:id="@+id/vFellSleep"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/rectangle_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSleep" />
+
+    <EditText
+        android:id="@+id/etFellSleep"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginVertical="20dp"
+        android:background="@null"
+        android:ellipsize="end"
+        android:hint="Fell Sleep"
+        android:inputType="time"
+        android:maxLength="5"
+        android:maxLines="1"
+        android:textAppearance="@style/input"
+        app:layout_constraintBottom_toBottomOf="@id/vFellSleep"
+        app:layout_constraintEnd_toEndOf="@id/vFellSleep"
+        app:layout_constraintStart_toStartOf="@id/vFellSleep"
+        app:layout_constraintTop_toTopOf="@+id/vFellSleep" />
+
+    <View
+        android:id="@+id/vWokeUp"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/rectangle_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vFellSleep" />
+
+    <EditText
+        android:id="@+id/etWokeUp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginVertical="20dp"
+        android:background="@null"
+        android:hint="Woke Up"
+        android:inputType="time"
+        android:maxLength="5"
+        android:maxLines="1"
+        android:textAppearance="@style/input"
+        app:layout_constraintBottom_toBottomOf="@id/vWokeUp"
+        app:layout_constraintEnd_toEndOf="@id/vWokeUp"
+        app:layout_constraintStart_toStartOf="@id/vWokeUp"
+        app:layout_constraintTop_toTopOf="@+id/vWokeUp" />
+
+    <View
+        android:id="@+id/vNote"
+        android:layout_width="0dp"
+        android:layout_height="260dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/rectangle_1_big"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vWokeUp" />
+
+    <EditText
+        android:id="@+id/etNote"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginVertical="20dp"
+        android:background="@null"
+        android:gravity="start"
+        android:hint="Note"
+        android:textAppearance="@style/input"
+        app:layout_constraintBottom_toBottomOf="@id/vNote"
+        app:layout_constraintEnd_toEndOf="@id/vNote"
+        app:layout_constraintStart_toStartOf="@id/vNote"
+        app:layout_constraintTop_toTopOf="@+id/vNote" />
+
+    <Button
+        android:id="@+id/btnSaveFeeding"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/rectangle_2"
+        android:text="@string/save"
+        android:textAppearance="@style/save"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/vLoading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#825E5E5E"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/img_loading"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvSaved"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/saved"
+        android:textAppearance="@style/saved"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
