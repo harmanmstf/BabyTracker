@@ -31,10 +31,18 @@
         <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_feedingFragment"
+            app:destination="@id/feedingFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.babytracker.ui.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/feedingFragment"
+        android:name="com.example.babytracker.ui.feeding.FeedingFragment"
+        android:label="fragment_feeding"
+        tools:layout="@layout/fragment_feeding" />
 </navigation>
