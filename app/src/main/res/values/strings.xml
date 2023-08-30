@@ -21,5 +21,16 @@
     <string name="save">Save</string>
     <string name="saved">Saved</string>
 
+    <string name="runny_nose">Runny Nose</string>
+    <string name="heartburn">Heartburn</string>
+    <string name="no_appetite">No Appetite</string>
+    <string name="rush">Rush</string>
+    <string name="low_energy">Low Energy</string>
+    <string name="nausea">Nausea</string>
+    <string name="cough">Cough</string>
+    <string name="fever">Fever</string>
+
+
+
 
 </resources>
