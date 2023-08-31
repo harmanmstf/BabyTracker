@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_homeFragment_to_symptomsFragment"
             app:destination="@id/symptomsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_calenderFragment"
+            app:destination="@id/calenderFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -77,4 +80,9 @@
             android:id="@+id/action_symptomsDetailFragment_to_symptomsFragment"
             app:destination="@id/symptomsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/calenderFragment"
+        android:name="com.example.babytracker.ui.calender.CalenderFragment"
+        android:label="fragment_calender"
+        tools:layout="@layout/fragment_calender" />
 </navigation>

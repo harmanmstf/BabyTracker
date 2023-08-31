@@ -41,6 +41,10 @@ class HomeFragment : Fragment() {
         binding.btnSymptoms.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_symptomsFragment)
         }
+
+        binding.btnCalender.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_calenderFragment)
+        }
     }
 
     override fun onDestroyView() {
