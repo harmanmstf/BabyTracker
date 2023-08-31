@@ -64,10 +64,17 @@
         <action
             android:id="@+id/action_symptomsFragment_to_symptomsDetailFragment"
             app:destination="@id/symptomsDetailFragment" />
+        <argument
+            android:name="symptomsNames"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/symptomsDetailFragment"
         android:name="com.example.babytracker.ui.symptoms.symptomsdetail.SymptomsDetailFragment"
         android:label="fragment_symptoms_detail"
-        tools:layout="@layout/fragment_symptoms_detail" />
+        tools:layout="@layout/fragment_symptoms_detail" >
+        <action
+            android:id="@+id/action_symptomsDetailFragment_to_symptomsFragment"
+            app:destination="@id/symptomsFragment" />
+    </fragment>
 </navigation>
