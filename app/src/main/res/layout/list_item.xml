@@ -8,39 +8,54 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="8dp"
-
     app:cardBackgroundColor="@color/card_background"
     app:cardCornerRadius="24dp"
-
-
-
     app:cardElevation="0dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/list_item"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:orientation="vertical">
+        >
 
         <TextView
             android:id="@+id/tvTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="time"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            android:layout_marginEnd="18dp"
+            android:layout_marginVertical="16dp"
+            android:textAppearance="@style/input"
+            tools:text="12:30 PM"/>
 
         <TextView
             android:id="@+id/tvAmount"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="time"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            android:layout_marginStart="18dp"
+            android:layout_marginVertical="16dp"
+            android:textAppearance="@style/input"
+            tools:text="200 ml"/>
 
         <TextView
+
             android:id="@+id/tvNote"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="time"/>
-    </LinearLayout>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvAmount"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="18dp"
+            android:layout_marginVertical="16dp"
+            tools:text="hello hello"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </com.google.android.material.card.MaterialCardView>
