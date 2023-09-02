@@ -8,11 +8,14 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.babytracker.R
 import com.example.babytracker.databinding.FragmentSleepBinding
+import java.util.Calendar
 
 class SleepFragment : Fragment() {
 
     private var _binding: FragmentSleepBinding? = null
     private val binding get() = _binding!!
+
+    private val calendar = Calendar.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
