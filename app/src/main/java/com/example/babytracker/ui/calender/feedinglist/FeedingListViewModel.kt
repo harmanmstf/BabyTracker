@@ -7,6 +7,8 @@ import com.example.babytracker.data.Repository
 import com.example.babytracker.data.entities.Feeding
 import com.example.babytracker.data.local.BabyTrackerDao
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 class FeedingListViewModel(private val repository: Repository) : ViewModel() {
 
@@ -21,6 +23,13 @@ class FeedingListViewModel(private val repository: Repository) : ViewModel() {
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }
+    }
+
+    private val _selectedDate = MutableStateFlow<String?>(null)
+    val selectedDate: StateFlow<String?> = _selectedDate
+
+    fun setSelectedDate(date: String) {
+        _selectedDate.value = date
     }
 }
 

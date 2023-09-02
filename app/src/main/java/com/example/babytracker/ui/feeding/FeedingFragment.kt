@@ -12,6 +12,7 @@ import com.example.babytracker.BabyTrackerApplication
 import com.example.babytracker.databinding.FragmentFeedingBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 
@@ -54,7 +55,11 @@ class FeedingFragment : Fragment() {
             val amount = binding.etAmount.text.toString()
             val note = binding.etNote.text.toString()
 
-            viewModel.saveFeeding(time, amount, note)
+
+
+            val dateFormat = SimpleDateFormat("E, MMM dd", Locale.getDefault())
+            val formattedDate = dateFormat.format(calendar.time)
+            viewModel.saveFeeding(time, amount, note, formattedDate)
         }
     }
 

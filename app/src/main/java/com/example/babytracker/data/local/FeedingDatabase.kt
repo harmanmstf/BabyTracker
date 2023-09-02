@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.babytracker.data.entities.Feeding
 
-@Database(entities = [Feeding::class], version = 1, exportSchema = false)
+@Database(entities = [Feeding::class], version = 2, exportSchema = false)
 abstract class ItemRoomDatabase : RoomDatabase() {
 
     abstract fun itemDao(): BabyTrackerDao

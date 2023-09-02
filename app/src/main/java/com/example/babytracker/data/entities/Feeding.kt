@@ -10,4 +10,5 @@ data class Feeding(
     val time: String,
     val amount: String,
     val note: String,
+    val date: String
 )

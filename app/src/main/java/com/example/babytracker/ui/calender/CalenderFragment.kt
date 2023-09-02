@@ -9,9 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import com.example.babytracker.BabyTrackerApplication
 import com.example.babytracker.R
 import com.example.babytracker.databinding.FragmentCalenderBinding
+import com.example.babytracker.ui.calender.feedinglist.FeedingListViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import java.text.SimpleDateFormat
@@ -26,6 +29,10 @@ class CalenderFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val calendar = Calendar.getInstance()
+
+    private val viewModel: FeedingListViewModel by activityViewModels {
+        FeedingListViewModel.FeedingViewModelFactory((activity?.application as BabyTrackerApplication).feedingDatabase.itemDao())
+    }
 
 
 
@@ -96,6 +103,8 @@ class CalenderFragment : Fragment() {
         val dateFormat = SimpleDateFormat("E, MMM dd", Locale.getDefault())
         val formattedDate = dateFormat.format(calendar.time)
         binding.tvDateTitle.text = formattedDate
+
+        viewModel.setSelectedDate(formattedDate)
     }
 
 }

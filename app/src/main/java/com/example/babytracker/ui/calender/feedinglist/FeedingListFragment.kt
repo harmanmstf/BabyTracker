@@ -48,6 +48,14 @@ class FeedingListFragment : Fragment() {
             }
         }
 
+        lifecycleScope.launch {
+            viewModel.selectedDate.collect { selectedDate ->
+                // Use the selected date as needed in your fragment
+                // For example, you can update UI elements with the selected date
+                binding.tvDateCurrent.text = selectedDate ?: "No date selected"
+            }
+        }
+
         return binding.root
     }
 }

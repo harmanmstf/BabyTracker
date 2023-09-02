@@ -9,12 +9,16 @@ import com.example.babytracker.data.local.BabyTrackerDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class FeedingViewModel(private val repository: Repository) : ViewModel() {
 
-    fun saveFeeding(time: String, amount: String, note: String) {
+    fun saveFeeding(time: String, amount: String, note: String, date: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val feeding = Feeding(time = time, amount = amount, note = note)
+
+            val feeding = Feeding(time = time, amount = amount, note = note, date = date)
             repository.insertFeeding(feeding)
         }
     }
