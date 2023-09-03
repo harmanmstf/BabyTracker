@@ -42,6 +42,8 @@ class SymptomsViewModel(private val repository: Repository) : ViewModel() {
 
             val symptoms = Symptoms(time = time, symptomName = symptomName, note = note, date = date)
             repository.insertSymptoms(symptoms)
+
+//            _symptoms.value = emptyList()
         }
     }
 

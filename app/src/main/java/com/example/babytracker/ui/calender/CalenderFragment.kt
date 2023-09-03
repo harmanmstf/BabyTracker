@@ -73,7 +73,11 @@ class CalenderFragment : Fragment() {
                 1 -> tab.icon= ContextCompat.getDrawable(tabLayout.context, R.drawable.btn_feeding_selected)
                 2 -> tab.icon= ContextCompat.getDrawable(tabLayout.context, R.drawable.btn_sleep_selected)
                 3 -> tab.icon=ContextCompat.getDrawable(tabLayout.context, R.drawable.btn_symptons_selected)
+                 else -> tab.icon
+
             }
+
+
         }.attach()
 
     }

@@ -53,8 +53,6 @@ class SymptomsDetailFragment : Fragment() {
         viewModel.symptoms.observe(viewLifecycleOwner){
             adapter.submitList(it)
         }
-
-
     }
 
     override fun onDestroyView() {

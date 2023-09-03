@@ -62,7 +62,7 @@
         app:tabGravity="fill"
         app:tabIndicatorColor="@null"
         app:tabMode="fixed"
-        app:tabSelectedTextColor="@android:color/white"
+        app:tabIconTint="@null"
         app:tabTextColor="@android:color/darker_gray">
 
         <com.google.android.material.tabs.TabItem

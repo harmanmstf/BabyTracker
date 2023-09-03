@@ -38,6 +38,8 @@ class FeedingViewModel(private val repository: Repository) : ViewModel() {
 
 
 
+
+
     class FeedingViewModelFactory(private val database: BabyTrackerDao) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(FeedingViewModel::class.java)) {

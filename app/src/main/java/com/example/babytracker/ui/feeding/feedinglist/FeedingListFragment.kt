@@ -34,16 +34,12 @@ class FeedingListFragment : Fragment() {
 
         binding.rvFeeding.layoutManager = LinearLayoutManager(requireContext())
         viewModel.selectedDate2.observe(viewLifecycleOwner) { selectedDate ->
-            // Use the selected date as needed in your fragment
-            // For example, you can update UI elements with the selected date
-            binding.tvDateCurrent.text = selectedDate ?: "No date selected"
-        }
-
-        val x = viewModel.selectedDate2.value.toString()
-        // Observe all feedings and update the UI
-        viewModel.retrieveItem(x).observe(viewLifecycleOwner) { feedings ->
-            feedings?.let {
-                feedingAdapter.submitList(feedings)
+            if (selectedDate != null) {
+                viewModel.retrieveItem(selectedDate).observe(viewLifecycleOwner) { feedings ->
+                    feedings?.let {
+                        feedingAdapter.submitList(feedings)
+                    }
+                }
             }
         }
 

@@ -43,18 +43,22 @@ class SymptomsListFragment : Fragment() {
 
         binding.rvSymptoms.layoutManager = LinearLayoutManager(requireContext())
         viewModel.selectedDate2.observe(viewLifecycleOwner) { selectedDate ->
-            // Use the selected date as needed in your fragment
-            // For example, you can update UI elements with the selected date
-
-        }
-
-        val x = viewModel.selectedDate2.value.toString()
-        // Observe all feedings and update the UI
-        viewModel.retrieveItem(x).observe(viewLifecycleOwner) { symptoms ->
-            symptoms?.let {
-                symptomsAdapter.submitList(symptoms)
+            if (selectedDate != null) {
+                viewModel.retrieveItem(selectedDate).observe(viewLifecycleOwner) { symptoms ->
+                    symptoms?.let {
+                        symptomsAdapter.submitList(symptoms)
+                    }
+                }
             }
         }
+
+     //   val x = viewModel.selectedDate2.value.toString()
+        // Observe all feedings and update the UI
+       // viewModel.retrieveItem(x).observe(viewLifecycleOwner) { symptoms ->
+        //    symptoms?.let {
+        //        symptomsAdapter.submitList(symptoms)
+       //     }
+       // }
     }
 
     override fun onDestroyView() {

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.switchMap
 import com.example.babytracker.data.Repository
 import com.example.babytracker.data.entities.Feeding
 import com.example.babytracker.data.entities.Sleep
@@ -35,6 +36,16 @@ class SleepViewModel(private val repository: Repository) : ViewModel() {
     fun retrieveItem(date: String): LiveData<List<Sleep>> {
         return repository.getSleeps(date)
     }
+
+    private val _sleeps = selectedDate2.switchMap { selectedDate ->
+        if (selectedDate != null) {
+            repository.getSleeps(selectedDate)
+        } else {
+            MutableLiveData()
+        }
+    }
+
+    val sleeps: LiveData<List<Sleep>> = _sleeps
 
 
 
