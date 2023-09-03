@@ -1,6 +1,8 @@
 package com.example.babytracker.ui.feeding
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,11 @@ import androidx.navigation.fragment.findNavController
 import com.example.babytracker.BabyTrackerApplication
 import com.example.babytracker.databinding.FragmentFeedingBinding
 import com.example.babytracker.util.TimePicker
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -58,12 +65,28 @@ class FeedingFragment : Fragment() {
             val note = binding.etNote.text.toString()
 
 
-
             val dateFormat = SimpleDateFormat("E, MMM dd", Locale.getDefault())
             val formattedDate = dateFormat.format(calendar.time)
             viewModel.saveFeeding(time, amount, note, formattedDate)
+
+            binding.vLoading.visibility = View.VISIBLE
+            binding.progressBar.visibility = View.VISIBLE
+
+            CoroutineScope(Dispatchers.IO).launch {
+                delay(2000)
+
+                withContext(Dispatchers.Main) {
+                    binding.progressBar.visibility = View.GONE
+                    binding.tvSaved.visibility = View.VISIBLE
+
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        findNavController().navigateUp()
+                    }, 1000)
+                }
+            }
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

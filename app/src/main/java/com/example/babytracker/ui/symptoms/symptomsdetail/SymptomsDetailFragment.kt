@@ -5,13 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.babytracker.BabyTrackerApplication
 import com.example.babytracker.R
 import com.example.babytracker.data.SymptomsDataSource
 import com.example.babytracker.databinding.FragmentSymptomsDetailBinding
+import com.example.babytracker.ui.symptoms.SymptomsViewModel
 
 class SymptomsDetailFragment : Fragment() {
 
@@ -19,7 +22,11 @@ class SymptomsDetailFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val dataSource = SymptomsDataSource()
-    private val adapter = SymptomsDetailAdapter(this)
+
+
+    private val viewModel: SymptomsViewModel by activityViewModels {
+        SymptomsViewModel.SymptomsViewModelFactory((activity?.application as BabyTrackerApplication).database.itemDao())
+    }
 
 
     override fun onCreateView(
@@ -37,21 +44,19 @@ class SymptomsDetailFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>("selectedSymptoms")
-            ?.observe(viewLifecycleOwner, Observer { selectedSymptoms ->
-                // Do something with the selectedSymptoms
-                // For example, update UI, show a toast, etc.
-            })
-
         binding.btnSaveFeeding.setOnClickListener {
-            val selectedSymptoms = adapter.currentList.filter { it.isSelected }.map { it.nameSymptom }
+            // Get the selected symptoms from the ViewModel
+            val selectedSymptoms = viewModel.selectedSymptoms.value ?: emptyList<String>()
 
-            // Set the selectedSymptoms in the savedStateHandle
-            findNavController().previousBackStackEntry?.savedStateHandle?.set("symptomsNames", selectedSymptoms)
+            // Perform any desired actions with the selected symptoms
+            // For example, you can save them to a database or pass them to the previous fragment.
 
-            findNavController().popBackStack()
+            // Once you've performed the actions, navigate back to the previous fragment
+            findNavController().navigateUp()
         }
 
+
+         val adapter = SymptomsDetailAdapter(this, viewModel)
         binding.rvSymptoms.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvSymptoms.adapter = adapter
 

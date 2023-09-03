@@ -14,6 +14,8 @@ import com.example.babytracker.ui.feeding.FeedingViewModel
 import com.example.babytracker.ui.feeding.feedinglist.FeedingListAdapter
 import com.example.babytracker.ui.sleep.SleepViewModel
 import com.example.babytracker.ui.sleep.sleeplist.SleepListAdapter
+import com.example.babytracker.ui.symptoms.SymptomsViewModel
+import com.example.babytracker.ui.symptoms.symptomslist.SymptomsListAdapter
 
 
 class AllListFragment : Fragment() {
@@ -28,6 +30,11 @@ class AllListFragment : Fragment() {
     private lateinit var feedingAdapter: FeedingListAdapter
     private val feedingViewModel: FeedingViewModel by activityViewModels {
         FeedingViewModel.FeedingViewModelFactory((activity?.application as BabyTrackerApplication).database.itemDao())
+    }
+
+    private lateinit var symptomsAdapter: SymptomsListAdapter
+    private val symptomsViewModel: SymptomsViewModel by activityViewModels {
+        SymptomsViewModel.SymptomsViewModelFactory((activity?.application as BabyTrackerApplication).database.itemDao())
     }
 
     override fun onCreateView(
@@ -75,6 +82,26 @@ class AllListFragment : Fragment() {
         sleepViewModel.retrieveItem(y).observe(viewLifecycleOwner) { sleeps ->
             sleeps?.let {
                 sleepAdapter.submitList(sleeps)
+            }
+        }
+
+
+        // Initialize RecyclerView and Adapter
+        symptomsAdapter = SymptomsListAdapter()
+        binding.rvSymptoms.adapter = symptomsAdapter
+
+        binding.rvSymptoms.layoutManager = LinearLayoutManager(requireContext())
+        symptomsViewModel.selectedDate2.observe(viewLifecycleOwner) { selectedDate ->
+            // Use the selected date as needed in your fragment
+            // For example, you can update UI elements with the selected date
+
+        }
+
+        val z = symptomsViewModel.selectedDate2.value.toString()
+        // Observe all feedings and update the UI
+        symptomsViewModel.retrieveItem(z).observe(viewLifecycleOwner) { symptoms ->
+            symptoms?.let {
+                symptomsAdapter.submitList(symptoms)
             }
         }
 

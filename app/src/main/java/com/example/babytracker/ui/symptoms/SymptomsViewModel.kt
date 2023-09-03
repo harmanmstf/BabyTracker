@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.babytracker.data.Repository
-import com.example.babytracker.data.entities.Feeding
 import com.example.babytracker.data.entities.Symptoms
 import com.example.babytracker.data.local.BabyTrackerDao
 import kotlinx.coroutines.CoroutineScope
@@ -16,13 +15,20 @@ import kotlinx.coroutines.launch
 class SymptomsViewModel(private val repository: Repository) : ViewModel() {
 
     private val _selectedDate = MutableLiveData<String?>(null)
+    private val _selectedSymptoms = MutableLiveData<List<String>>(emptyList())
 
-
+    val selectedSymptoms: LiveData<List<String>> = _selectedSymptoms
     val selectedDate2: LiveData<String?> = _selectedDate
 
     fun setSelectedDate(date: String?) {
         _selectedDate.value = date
     }
+
+    fun setSelectedSymptoms(symptoms: List<String>) {
+        _selectedSymptoms.value = symptoms
+    }
+
+
 
     fun saveSymptoms(time: String, symptomName: String, note: String, date: String) {
         CoroutineScope(Dispatchers.IO).launch {

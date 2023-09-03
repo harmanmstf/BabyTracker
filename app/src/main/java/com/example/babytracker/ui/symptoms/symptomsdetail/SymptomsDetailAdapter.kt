@@ -1,22 +1,24 @@
 package com.example.babytracker.ui.symptoms.symptomsdetail
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.babytracker.R
 import com.example.babytracker.databinding.SymptomsDetailItemBinding
 import com.example.babytracker.model.SymptomsDetail
+import com.example.babytracker.ui.symptoms.SymptomsViewModel
 
 
-class SymptomsDetailAdapter(private val context: SymptomsDetailFragment) : ListAdapter<SymptomsDetail, SymptomsDetailAdapter.SymptomsViewHolder>(SymptomsDiffCallback()) {
+class SymptomsDetailAdapter(
+    private val context: SymptomsDetailFragment,
+    private val viewModel: SymptomsViewModel,
+) : ListAdapter<SymptomsDetail, SymptomsDetailAdapter.SymptomsViewHolder>(SymptomsDiffCallback()) {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SymptomsViewHolder {
-        val binding = SymptomsDetailItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            SymptomsDetailItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return SymptomsViewHolder(binding)
     }
 
@@ -38,22 +40,30 @@ class SymptomsDetailAdapter(private val context: SymptomsDetailFragment) : ListA
             binding.root.setOnClickListener {
                 item.isSelected = !item.isSelected
                 binding.cardView.isChecked = item.isSelected
-                true
+
+
+
+                val selectedSymptoms = viewModel.selectedSymptoms.value?.toMutableList() ?: mutableListOf()
+                if (item.isSelected) {
+                    // Add the selected symptom to the list
+                    selectedSymptoms.add(context.resources.getString(item.nameSymptom))
+                } else {
+                    // Remove the unselected symptom from the list
+                    selectedSymptoms.remove(context.resources.getString(item.nameSymptom))
+                }
+                viewModel.setSelectedSymptoms(selectedSymptoms)
             }
-            }
 
-
-
-
-    }
-}
-
-class SymptomsDiffCallback : DiffUtil.ItemCallback<SymptomsDetail>() {
-    override fun areItemsTheSame(oldItem: SymptomsDetail, newItem: SymptomsDetail): Boolean {
-        return oldItem.nameSymptom == newItem.nameSymptom
+        }
     }
 
-    override fun areContentsTheSame(oldItem: SymptomsDetail, newItem: SymptomsDetail): Boolean {
-        return oldItem == newItem
+    class SymptomsDiffCallback : DiffUtil.ItemCallback<SymptomsDetail>() {
+        override fun areItemsTheSame(oldItem: SymptomsDetail, newItem: SymptomsDetail): Boolean {
+            return oldItem.nameSymptom == newItem.nameSymptom
+        }
+
+        override fun areContentsTheSame(oldItem: SymptomsDetail, newItem: SymptomsDetail): Boolean {
+            return oldItem == newItem
+        }
     }
 }
