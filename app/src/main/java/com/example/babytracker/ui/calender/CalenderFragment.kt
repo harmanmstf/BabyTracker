@@ -10,16 +10,14 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.example.babytracker.BabyTrackerApplication
 import com.example.babytracker.R
 import com.example.babytracker.databinding.FragmentCalenderBinding
-import com.example.babytracker.ui.calender.feedinglist.FeedingListViewModel
-import com.google.android.material.tabs.TabLayout
+import com.example.babytracker.ui.feeding.FeedingViewModel
+import com.example.babytracker.ui.sleep.SleepViewModel
+import com.example.babytracker.ui.symptoms.SymptomsViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Locale
 
@@ -30,8 +28,16 @@ class CalenderFragment : Fragment() {
 
     private val calendar = Calendar.getInstance()
 
-    private val viewModel: FeedingListViewModel by activityViewModels {
-        FeedingListViewModel.FeedingViewModelFactory((activity?.application as BabyTrackerApplication).feedingDatabase.itemDao())
+    private val feedingViewModel: FeedingViewModel by activityViewModels {
+        FeedingViewModel.FeedingViewModelFactory((activity?.application as BabyTrackerApplication).database.itemDao())
+    }
+
+    private val sleepViewModel: SleepViewModel by activityViewModels {
+        SleepViewModel.SleepViewModelFactory((activity?.application as BabyTrackerApplication).database.itemDao())
+    }
+
+    private val symptomsViewModel: SymptomsViewModel by activityViewModels {
+        SymptomsViewModel.SymptomsViewModelFactory((activity?.application as BabyTrackerApplication).database.itemDao())
     }
 
 
@@ -104,7 +110,9 @@ class CalenderFragment : Fragment() {
         val formattedDate = dateFormat.format(calendar.time)
         binding.tvDateTitle.text = formattedDate
 
-        viewModel.setSelectedDate(formattedDate)
+        feedingViewModel.setSelectedDate(formattedDate)
+        sleepViewModel.setSelectedDate(formattedDate)
+        symptomsViewModel.setSelectedDate(formattedDate)
     }
 
 }

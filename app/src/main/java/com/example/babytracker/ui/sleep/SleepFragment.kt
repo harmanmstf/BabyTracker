@@ -5,16 +5,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.example.babytracker.R
+import com.example.babytracker.BabyTrackerApplication
 import com.example.babytracker.databinding.FragmentSleepBinding
+import com.example.babytracker.util.TimePicker
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 
 class SleepFragment : Fragment() {
 
     private var _binding: FragmentSleepBinding? = null
     private val binding get() = _binding!!
 
+    private val viewModel: SleepViewModel by activityViewModels {
+        SleepViewModel.SleepViewModelFactory((activity?.application as BabyTrackerApplication).database.itemDao())
+    }
+
+    private val timePicker: TimePicker by lazy { TimePicker(requireContext()) }
     private val calendar = Calendar.getInstance()
 
     override fun onCreateView(
@@ -30,6 +39,31 @@ class SleepFragment : Fragment() {
 
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
+        }
+
+
+        // Set a click listener to show the time picker dialog
+        binding.vFellSleep.setOnClickListener {
+            timePicker.showTimePickerDialog(binding.tvFellSleep)
+            timePicker.updateTimeTextView(binding.tvFellSleep)
+        }
+
+        binding.vWokeUp.setOnClickListener {
+            timePicker.showTimePickerDialog(binding.tvWokeUp)
+            timePicker.updateTimeTextView(binding.tvWokeUp)
+        }
+
+
+        binding.btnSaveSleep.setOnClickListener {
+            val fellSleepTime = binding.tvFellSleep.text.toString()
+            val wokeUpTime = binding.tvWokeUp.text.toString()
+            val note = binding.etNote.text.toString()
+
+
+
+            val dateFormat = SimpleDateFormat("E, MMM dd", Locale.getDefault())
+            val formattedDate = dateFormat.format(calendar.time)
+            viewModel.saveSleep(fellSleepTime, wokeUpTime, note, formattedDate)
         }
     }
 

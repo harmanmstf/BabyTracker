@@ -1,21 +1,23 @@
-package com.example.babytracker.ui.calender.feedinglist
+package com.example.babytracker.ui.feeding.feedinglist
 
 import com.example.babytracker.data.entities.Feeding
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.babytracker.databinding.ListItemBinding
+import com.example.babytracker.databinding.FeedingListItemBinding
 
 
-class FeedingListAdapter : ListAdapter<Feeding, FeedingListAdapter.FeedingViewHolder>(FeedingDiffCallback()) {
+
+class FeedingListAdapter : ListAdapter<Feeding, FeedingListAdapter.FeedingViewHolder>(
+    FeedingDiffCallback()
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedingViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = ListItemBinding.inflate(inflater, parent, false)
+        val binding = FeedingListItemBinding.inflate(inflater, parent, false)
         return FeedingViewHolder(binding)
     }
 
@@ -24,7 +26,7 @@ class FeedingListAdapter : ListAdapter<Feeding, FeedingListAdapter.FeedingViewHo
         holder.bind(currentFeeding)
     }
 
-     class FeedingViewHolder(private val binding: ListItemBinding) :
+     class FeedingViewHolder(private val binding: FeedingListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(feeding: Feeding) {

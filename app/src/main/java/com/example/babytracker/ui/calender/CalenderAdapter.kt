@@ -3,9 +3,9 @@ package com.example.babytracker.ui.calender
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.babytracker.ui.calender.alllist.AllListFragment
-import com.example.babytracker.ui.calender.feedinglist.FeedingListFragment
-import com.example.babytracker.ui.calender.sleeplist.SleepListFragment
-import com.example.babytracker.ui.calender.symptomslist.SymptomsListFragment
+import com.example.babytracker.ui.feeding.feedinglist.FeedingListFragment
+import com.example.babytracker.ui.sleep.sleeplist.SleepListFragment
+import com.example.babytracker.ui.symptoms.symptomslist.SymptomsListFragment
 
 class CalenderAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 

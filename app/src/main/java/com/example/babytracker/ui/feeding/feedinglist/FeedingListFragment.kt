@@ -1,4 +1,4 @@
-package com.example.babytracker.ui.calender.feedinglist
+package com.example.babytracker.ui.feeding.feedinglist
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,23 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.babytracker.BabyTrackerApplication
-import com.example.babytracker.R
 import com.example.babytracker.databinding.FragmentFeedingListBinding
 import com.example.babytracker.ui.feeding.FeedingViewModel
-import kotlinx.coroutines.launch
 
 
 class FeedingListFragment : Fragment() {
 
 
     private lateinit var feedingAdapter: FeedingListAdapter
-    private val viewModel: FeedingListViewModel by activityViewModels {
-        FeedingListViewModel.FeedingViewModelFactory((activity?.application as BabyTrackerApplication).feedingDatabase.itemDao())
+    private val viewModel: FeedingViewModel by activityViewModels {
+        FeedingViewModel.FeedingViewModelFactory((activity?.application as BabyTrackerApplication).database.itemDao())
     }
 
     override fun onCreateView(
@@ -38,10 +33,15 @@ class FeedingListFragment : Fragment() {
         binding.rvFeeding.adapter = feedingAdapter
 
         binding.rvFeeding.layoutManager = LinearLayoutManager(requireContext())
-val a = viewModel.selectedDate2.value.toString()
-        binding.tvDateCurrent.text = a
+        viewModel.selectedDate2.observe(viewLifecycleOwner) { selectedDate ->
+            // Use the selected date as needed in your fragment
+            // For example, you can update UI elements with the selected date
+            binding.tvDateCurrent.text = selectedDate ?: "No date selected"
+        }
+
+        val x = viewModel.selectedDate2.value.toString()
         // Observe all feedings and update the UI
-        viewModel.retrieveItem(a).observe(viewLifecycleOwner) { feedings ->
+        viewModel.retrieveItem(x).observe(viewLifecycleOwner) { feedings ->
             feedings?.let {
                 feedingAdapter.submitList(feedings)
             }

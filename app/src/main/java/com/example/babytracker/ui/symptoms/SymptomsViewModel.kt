@@ -1,4 +1,4 @@
-package com.example.babytracker.ui.feeding
+package com.example.babytracker.ui.symptoms
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,13 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.babytracker.data.Repository
 import com.example.babytracker.data.entities.Feeding
+import com.example.babytracker.data.entities.Symptoms
 import com.example.babytracker.data.local.BabyTrackerDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class FeedingViewModel(private val repository: Repository) : ViewModel() {
+class SymptomsViewModel(private val repository: Repository) : ViewModel() {
 
     private val _selectedDate = MutableLiveData<String?>(null)
 
@@ -23,26 +24,26 @@ class FeedingViewModel(private val repository: Repository) : ViewModel() {
         _selectedDate.value = date
     }
 
-    fun saveFeeding(time: String, amount: String, note: String, date: String) {
+    fun saveSymptoms(time: String, symptomName: String, note: String, date: String) {
         CoroutineScope(Dispatchers.IO).launch {
 
-            val feeding = Feeding(time = time, amount = amount, note = note, date = date)
-            repository.insertFeeding(feeding)
+            val symptoms = Symptoms(time = time, symptomName = symptomName, note = note, date = date)
+            repository.insertSymptoms(symptoms)
         }
     }
 
-    fun retrieveItem(date: String): LiveData<List<Feeding>> {
-        return repository.getFeedings(date)
+    fun retrieveItem(date: String): LiveData<List<Symptoms>> {
+        return repository.getSymptoms(date)
     }
 
 
 
 
-    class FeedingViewModelFactory(private val database: BabyTrackerDao) : ViewModelProvider.Factory {
+    class SymptomsViewModelFactory(private val database: BabyTrackerDao) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(FeedingViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(SymptomsViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return FeedingViewModel(Repository(database)) as T
+                return SymptomsViewModel(Repository(database)) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }

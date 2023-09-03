@@ -5,14 +5,30 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.babytracker.BabyTrackerApplication
 import com.example.babytracker.R
 import com.example.babytracker.databinding.FragmentAllListBinding
+import com.example.babytracker.ui.feeding.FeedingViewModel
+import com.example.babytracker.ui.feeding.feedinglist.FeedingListAdapter
+import com.example.babytracker.ui.sleep.SleepViewModel
+import com.example.babytracker.ui.sleep.sleeplist.SleepListAdapter
 
 
 class AllListFragment : Fragment() {
 
     private var _binding: FragmentAllListBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var sleepAdapter: SleepListAdapter
+    private val sleepViewModel: SleepViewModel by activityViewModels {
+        SleepViewModel.SleepViewModelFactory((activity?.application as BabyTrackerApplication).database.itemDao())
+    }
+    private lateinit var feedingAdapter: FeedingListAdapter
+    private val feedingViewModel: FeedingViewModel by activityViewModels {
+        FeedingViewModel.FeedingViewModelFactory((activity?.application as BabyTrackerApplication).database.itemDao())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,6 +40,44 @@ class AllListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        feedingAdapter = FeedingListAdapter()
+        binding.rvFeeding.adapter = feedingAdapter
+
+        binding.rvFeeding.layoutManager = LinearLayoutManager(requireContext())
+        feedingViewModel.selectedDate2.observe(viewLifecycleOwner) { selectedDate ->
+            // Use the selected date as needed in your fragment
+            // For example, you can update UI elements with the selected date
+
+        }
+
+        val x = feedingViewModel.selectedDate2.value.toString()
+        // Observe all feedings and update the UI
+        feedingViewModel.retrieveItem(x).observe(viewLifecycleOwner) { feedings ->
+            feedings?.let {
+                feedingAdapter.submitList(feedings)
+            }
+        }
+
+        sleepAdapter = SleepListAdapter()
+        binding.rvSleep.adapter = sleepAdapter
+
+        binding.rvSleep.layoutManager = LinearLayoutManager(requireContext())
+        sleepViewModel.selectedDate2.observe(viewLifecycleOwner) { selectedDate ->
+            // Use the selected date as needed in your fragment
+            // For example, you can update UI elements with the selected date
+
+        }
+
+        val y = sleepViewModel.selectedDate2.value.toString()
+        // Observe all feedings and update the UI
+        sleepViewModel.retrieveItem(y).observe(viewLifecycleOwner) { sleeps ->
+            sleeps?.let {
+                sleepAdapter.submitList(sleeps)
+            }
+        }
+
     }
 
     override fun onDestroyView() {

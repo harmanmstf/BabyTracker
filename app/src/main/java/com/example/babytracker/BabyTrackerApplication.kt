@@ -6,5 +6,5 @@ import com.example.babytracker.data.local.ItemRoomDatabase
 class BabyTrackerApplication: Application() {
 
 
-        val feedingDatabase: ItemRoomDatabase by lazy { ItemRoomDatabase.getDatabase(this) }
+        val database: ItemRoomDatabase by lazy { ItemRoomDatabase.getDatabase(this) }
     }

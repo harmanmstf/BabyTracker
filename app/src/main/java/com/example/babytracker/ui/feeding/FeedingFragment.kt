@@ -1,6 +1,5 @@
 package com.example.babytracker.ui.feeding
 
-import android.app.TimePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,9 +9,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.babytracker.BabyTrackerApplication
 import com.example.babytracker.databinding.FragmentFeedingBinding
+import com.example.babytracker.util.TimePicker
 import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Date
 import java.util.Locale
 
 
@@ -21,10 +20,13 @@ class FeedingFragment : Fragment() {
     private var _binding: FragmentFeedingBinding? = null
     private val binding get() = _binding!!
 
-    private val calendar = Calendar.getInstance()
+
     private val viewModel: FeedingViewModel by activityViewModels {
-        FeedingViewModel.FeedingViewModelFactory((activity?.application as BabyTrackerApplication).feedingDatabase.itemDao())
+        FeedingViewModel.FeedingViewModelFactory((activity?.application as BabyTrackerApplication).database.itemDao())
     }
+
+    private val timePicker: TimePicker by lazy { TimePicker(requireContext()) }
+    private val calendar = Calendar.getInstance()
 
 
     override fun onCreateView(
@@ -45,8 +47,8 @@ class FeedingFragment : Fragment() {
 
         // Set a click listener to show the time picker dialog
         binding.vTime.setOnClickListener {
-            showTimePickerDialog()
-            updateTimeTextView()
+            timePicker.showTimePickerDialog(binding.tvFeedingTime)
+            timePicker.updateTimeTextView(binding.tvFeedingTime)
         }
 
 
@@ -66,29 +68,6 @@ class FeedingFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun showTimePickerDialog() {
-        val timePickerDialog = TimePickerDialog(
-            requireContext(),
-            TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
-                // Update the calendar with the selected time
-                calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
-                calendar.set(Calendar.MINUTE, minute)
-                // Update the TextView with the selected time
-                updateTimeTextView()
-            },
-            calendar.get(Calendar.HOUR_OF_DAY),
-            calendar.get(Calendar.MINUTE),
-            false // 24-hour format (true for 24-hour format)
-        )
-        timePickerDialog.show()
-    }
-
-    private fun updateTimeTextView() {
-        val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
-        val formattedTime = timeFormat.format(calendar.time)
-        binding.tvFeedingTime.text = formattedTime
     }
 }
 
