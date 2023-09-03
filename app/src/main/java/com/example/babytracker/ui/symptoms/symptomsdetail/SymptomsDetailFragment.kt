@@ -6,12 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.babytracker.BabyTrackerApplication
-import com.example.babytracker.R
 import com.example.babytracker.data.SymptomsDataSource
 import com.example.babytracker.databinding.FragmentSymptomsDetailBinding
 import com.example.babytracker.ui.symptoms.SymptomsViewModel
@@ -45,23 +42,17 @@ class SymptomsDetailFragment : Fragment() {
         }
 
         binding.btnSaveFeeding.setOnClickListener {
-            // Get the selected symptoms from the ViewModel
-            val selectedSymptoms = viewModel.selectedSymptoms.value ?: emptyList<String>()
-
-            // Perform any desired actions with the selected symptoms
-            // For example, you can save them to a database or pass them to the previous fragment.
-
-            // Once you've performed the actions, navigate back to the previous fragment
             findNavController().navigateUp()
         }
 
 
-         val adapter = SymptomsDetailAdapter(this, viewModel)
+        val adapter = SymptomsDetailAdapter(this) { viewModel.setSymptomSelectStatus(it) }
         binding.rvSymptoms.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvSymptoms.adapter = adapter
 
-        val symptoms = dataSource.loadSymptoms()
-        adapter.submitList(symptoms)
+        viewModel.symptoms.observe(viewLifecycleOwner){
+            adapter.submitList(it)
+        }
 
 
     }

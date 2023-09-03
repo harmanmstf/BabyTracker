@@ -5,8 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.babytracker.data.Repository
+import com.example.babytracker.data.SymptomsDataSource
 import com.example.babytracker.data.entities.Symptoms
 import com.example.babytracker.data.local.BabyTrackerDao
+import com.example.babytracker.model.SymptomsDetail
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,20 +16,25 @@ import kotlinx.coroutines.launch
 
 class SymptomsViewModel(private val repository: Repository) : ViewModel() {
 
+    private val dataSource = SymptomsDataSource()
     private val _selectedDate = MutableLiveData<String?>(null)
-    private val _selectedSymptoms = MutableLiveData<List<String>>(emptyList())
 
-    val selectedSymptoms: LiveData<List<String>> = _selectedSymptoms
+    private val _symptoms = MutableLiveData(dataSource.loadSymptoms())
+
+    val symptoms: LiveData<List<SymptomsDetail>> = _symptoms
+
     val selectedDate2: LiveData<String?> = _selectedDate
 
     fun setSelectedDate(date: String?) {
         _selectedDate.value = date
     }
 
-    fun setSelectedSymptoms(symptoms: List<String>) {
-        _selectedSymptoms.value = symptoms
+    fun setSymptomSelectStatus(item: SymptomsDetail) {
+        _symptoms.value = symptoms.value?.map {
+            if (item == it) it.copy(isSelected = it.isSelected.not())
+            else it
+        }
     }
-
 
 
     fun saveSymptoms(time: String, symptomName: String, note: String, date: String) {
@@ -43,9 +50,8 @@ class SymptomsViewModel(private val repository: Repository) : ViewModel() {
     }
 
 
-
-
-    class SymptomsViewModelFactory(private val database: BabyTrackerDao) : ViewModelProvider.Factory {
+    class SymptomsViewModelFactory(private val database: BabyTrackerDao) :
+        ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(SymptomsViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")

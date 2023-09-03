@@ -8,14 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.babytracker.BabyTrackerApplication
 import com.example.babytracker.R
-import com.example.babytracker.databinding.FragmentFeedingBinding
 import com.example.babytracker.databinding.FragmentSymptomsBinding
-import com.example.babytracker.ui.feeding.FeedingViewModel
 import com.example.babytracker.util.TimePicker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -58,8 +54,8 @@ class SymptomsFragment : Fragment() {
             findNavController().navigate(R.id.action_symptomsFragment_to_symptomsDetailFragment)
         }
 
-       // val selectedSymptoms = findNavController().previousBackStackEntry?.savedStateHandle?.get<String>("symptomsNames")
-      //  if (selectedSymptoms != null) {
+        // val selectedSymptoms = findNavController().previousBackStackEntry?.savedStateHandle?.get<String>("symptomsNames")
+        //  if (selectedSymptoms != null) {
         //    binding.tvSymptoms.text = selectedSymptoms.toString()}
 
         binding.vTime.setOnClickListener {
@@ -97,9 +93,16 @@ class SymptomsFragment : Fragment() {
         }
 
 
-        viewModel.selectedSymptoms.observe(viewLifecycleOwner, Observer { symptoms ->
-            binding.tvSymptoms.text = (symptoms ?: "No symptoms selected").toString()
-        })
+        viewModel.symptoms.observe(viewLifecycleOwner) { symptoms ->
+
+            val selectedSymptoms = symptoms.filter {
+                it.isSelected
+            }
+
+            binding.tvSymptoms.text = selectedSymptoms.joinToString(", ") {
+                requireContext().getString(it.nameSymptom)
+            }
+        }
     }
 
     override fun onDestroyView() {
