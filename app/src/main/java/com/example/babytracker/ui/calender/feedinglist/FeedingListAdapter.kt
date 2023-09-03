@@ -24,7 +24,7 @@ class FeedingListAdapter : ListAdapter<Feeding, FeedingListAdapter.FeedingViewHo
         holder.bind(currentFeeding)
     }
 
-    inner class FeedingViewHolder(private val binding: ListItemBinding) :
+     class FeedingViewHolder(private val binding: ListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(feeding: Feeding) {
