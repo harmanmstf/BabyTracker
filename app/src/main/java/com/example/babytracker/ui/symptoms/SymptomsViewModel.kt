@@ -48,7 +48,6 @@ class SymptomsViewModel@Inject constructor(
             val symptoms = Symptoms(time = time, symptomName = symptomName, note = note, date = date)
             repository.insertSymptoms(symptoms)
 
-//            _symptoms.value = emptyList()
         }
     }
 
