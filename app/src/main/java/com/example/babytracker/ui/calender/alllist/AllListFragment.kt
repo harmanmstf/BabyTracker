@@ -51,59 +51,37 @@ class AllListFragment : Fragment() {
 
         feedingAdapter = FeedingListAdapter()
         binding.rvFeeding.adapter = feedingAdapter
-
         binding.rvFeeding.layoutManager = LinearLayoutManager(requireContext())
-        feedingViewModel.selectedDate2.observe(viewLifecycleOwner) { selectedDate ->
-            // Use the selected date as needed in your fragment
-            // For example, you can update UI elements with the selected date
 
-        }
-
-        val x = feedingViewModel.selectedDate2.value.toString()
-        // Observe all feedings and update the UI
-        feedingViewModel.retrieveItem(x).observe(viewLifecycleOwner) { feedings ->
+        feedingViewModel.feedings.observe(viewLifecycleOwner) { feedings ->
             feedings?.let {
                 feedingAdapter.submitList(feedings)
             }
         }
 
+
         sleepAdapter = SleepListAdapter()
         binding.rvSleep.adapter = sleepAdapter
-
         binding.rvSleep.layoutManager = LinearLayoutManager(requireContext())
-        sleepViewModel.selectedDate2.observe(viewLifecycleOwner) { selectedDate ->
-            // Use the selected date as needed in your fragment
-            // For example, you can update UI elements with the selected date
 
-        }
-
-        val y = sleepViewModel.selectedDate2.value.toString()
-        // Observe all feedings and update the UI
-        sleepViewModel.retrieveItem(y).observe(viewLifecycleOwner) { sleeps ->
+        sleepViewModel.sleeps.observe(viewLifecycleOwner) { sleeps ->
             sleeps?.let {
                 sleepAdapter.submitList(sleeps)
             }
         }
 
 
-        // Initialize RecyclerView and Adapter
         symptomsAdapter = SymptomsListAdapter()
         binding.rvSymptoms.adapter = symptomsAdapter
-
         binding.rvSymptoms.layoutManager = LinearLayoutManager(requireContext())
-        symptomsViewModel.selectedDate2.observe(viewLifecycleOwner) { selectedDate ->
-            // Use the selected date as needed in your fragment
-            // For example, you can update UI elements with the selected date
-
-        }
-
-        val z = symptomsViewModel.selectedDate2.value.toString()
-        // Observe all feedings and update the UI
-        symptomsViewModel.retrieveItem(z).observe(viewLifecycleOwner) { symptoms ->
+        symptomsViewModel.symptomsList.observe(viewLifecycleOwner) { symptoms ->
             symptoms?.let {
                 symptomsAdapter.submitList(symptoms)
             }
         }
+
+
+
 
     }
 

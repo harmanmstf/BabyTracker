@@ -31,15 +31,11 @@ class FeedingListFragment : Fragment() {
         // Initialize RecyclerView and Adapter
         feedingAdapter = FeedingListAdapter()
         binding.rvFeeding.adapter = feedingAdapter
-
         binding.rvFeeding.layoutManager = LinearLayoutManager(requireContext())
-        viewModel.selectedDate2.observe(viewLifecycleOwner) { selectedDate ->
-            if (selectedDate != null) {
-                viewModel.retrieveItem(selectedDate).observe(viewLifecycleOwner) { feedings ->
-                    feedings?.let {
-                        feedingAdapter.submitList(feedings)
-                    }
-                }
+
+        viewModel.feedings.observe(viewLifecycleOwner) { feedings ->
+            feedings?.let {
+                feedingAdapter.submitList(feedings)
             }
         }
 

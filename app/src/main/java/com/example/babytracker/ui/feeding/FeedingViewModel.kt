@@ -4,8 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.switchMap
 import com.example.babytracker.data.Repository
 import com.example.babytracker.data.entities.Feeding
+import com.example.babytracker.data.entities.Symptoms
 import com.example.babytracker.data.local.BabyTrackerDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -15,9 +17,7 @@ import kotlinx.coroutines.launch
 class FeedingViewModel(private val repository: Repository) : ViewModel() {
 
     private val _selectedDate = MutableLiveData<String?>(null)
-
-
-    val selectedDate2: LiveData<String?> = _selectedDate
+    private val selectedDate: LiveData<String?> = _selectedDate
 
     fun setSelectedDate(date: String?) {
         _selectedDate.value = date
@@ -31,13 +31,15 @@ class FeedingViewModel(private val repository: Repository) : ViewModel() {
         }
     }
 
-    fun retrieveItem(date: String): LiveData<List<Feeding>> {
-        return repository.getFeedings(date)
+    private val _feedings = selectedDate.switchMap { selectedDate ->
+        if (selectedDate != null) {
+            repository.getFeedings(selectedDate)
+        } else {
+            MutableLiveData()
+        }
     }
 
-
-
-
+    val feedings: LiveData<List<Feeding>> = _feedings
 
 
     class FeedingViewModelFactory(private val database: BabyTrackerDao) : ViewModelProvider.Factory {

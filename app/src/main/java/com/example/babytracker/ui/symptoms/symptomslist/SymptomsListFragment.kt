@@ -42,23 +42,13 @@ class SymptomsListFragment : Fragment() {
         binding.rvSymptoms.adapter = symptomsAdapter
 
         binding.rvSymptoms.layoutManager = LinearLayoutManager(requireContext())
-        viewModel.selectedDate2.observe(viewLifecycleOwner) { selectedDate ->
-            if (selectedDate != null) {
-                viewModel.retrieveItem(selectedDate).observe(viewLifecycleOwner) { symptoms ->
-                    symptoms?.let {
-                        symptomsAdapter.submitList(symptoms)
-                    }
-                }
+        viewModel.symptomsList.observe(viewLifecycleOwner) { symptoms ->
+            symptoms?.let {
+                symptomsAdapter.submitList(symptoms)
             }
         }
 
-     //   val x = viewModel.selectedDate2.value.toString()
-        // Observe all feedings and update the UI
-       // viewModel.retrieveItem(x).observe(viewLifecycleOwner) { symptoms ->
-        //    symptoms?.let {
-        //        symptomsAdapter.submitList(symptoms)
-       //     }
-       // }
+
     }
 
     override fun onDestroyView() {

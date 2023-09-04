@@ -17,9 +17,7 @@ import kotlinx.coroutines.launch
 class SleepViewModel(private val repository: Repository) : ViewModel() {
 
     private val _selectedDate = MutableLiveData<String?>(null)
-
-
-    val selectedDate2: LiveData<String?> = _selectedDate
+    val selectedDate: LiveData<String?> = _selectedDate
 
     fun setSelectedDate(date: String?) {
         _selectedDate.value = date
@@ -33,11 +31,7 @@ class SleepViewModel(private val repository: Repository) : ViewModel() {
         }
     }
 
-    fun retrieveItem(date: String): LiveData<List<Sleep>> {
-        return repository.getSleeps(date)
-    }
-
-    private val _sleeps = selectedDate2.switchMap { selectedDate ->
+    private val _sleeps = selectedDate.switchMap { selectedDate ->
         if (selectedDate != null) {
             repository.getSleeps(selectedDate)
         } else {

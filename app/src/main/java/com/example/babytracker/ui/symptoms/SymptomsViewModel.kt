@@ -4,8 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.switchMap
 import com.example.babytracker.data.Repository
 import com.example.babytracker.data.SymptomsDataSource
+import com.example.babytracker.data.entities.Sleep
 import com.example.babytracker.data.entities.Symptoms
 import com.example.babytracker.data.local.BabyTrackerDao
 import com.example.babytracker.model.SymptomsDetail
@@ -23,7 +25,7 @@ class SymptomsViewModel(private val repository: Repository) : ViewModel() {
 
     val symptoms: LiveData<List<SymptomsDetail>> = _symptoms
 
-    val selectedDate2: LiveData<String?> = _selectedDate
+    val selectedDate: LiveData<String?> = _selectedDate
 
     fun setSelectedDate(date: String?) {
         _selectedDate.value = date
@@ -47,9 +49,17 @@ class SymptomsViewModel(private val repository: Repository) : ViewModel() {
         }
     }
 
-    fun retrieveItem(date: String): LiveData<List<Symptoms>> {
-        return repository.getSymptoms(date)
+
+
+    private val _symptomsList = selectedDate.switchMap { selectedDate ->
+        if (selectedDate != null) {
+            repository.getSymptoms(selectedDate)
+        } else {
+            MutableLiveData()
+        }
     }
+
+    val symptomsList: LiveData<List<Symptoms>> = _symptomsList
 
 
     class SymptomsViewModelFactory(private val database: BabyTrackerDao) :
