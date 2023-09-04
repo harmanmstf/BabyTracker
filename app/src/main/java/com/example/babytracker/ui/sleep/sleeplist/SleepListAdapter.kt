@@ -1,5 +1,6 @@
 package com.example.babytracker.ui.sleep.sleeplist
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -29,10 +30,11 @@ class SleepListAdapter : ListAdapter<Sleep, SleepListAdapter.SleepViewHolder>(
     class SleepViewHolder(private val binding: SleepListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("SetTextI18n")
         fun bind(sleep: Sleep) {
-            binding.tvFellSleep.text = sleep.fellSleepTime
+            binding.tvFellSleep.text = "time: ${sleep.fellSleepTime}"
             binding.tvWokeUp.text = sleep.wokeUpTime
-            binding.tvSleepNote.text = sleep.note
+            binding.tvSleepNote.text = "note: ${sleep.note }"
         }
     }
 }

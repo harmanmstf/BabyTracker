@@ -29,7 +29,7 @@ class SymptomsFragment : Fragment() {
     private var _binding: FragmentSymptomsBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: SymptomsViewModel by activityViewModels ()
+    private val viewModel: SymptomsViewModel by activityViewModels()
 
     private val timePicker: TimePicker by lazy { TimePicker(requireContext()) }
     private val calendar = Calendar.getInstance()
@@ -70,7 +70,6 @@ class SymptomsFragment : Fragment() {
             val note = binding.etNote.text.toString()
 
 
-
             val dateFormat = SimpleDateFormat("E, MMM dd", Locale.getDefault())
             val formattedDate = dateFormat.format(calendar.time)
             viewModel.saveSymptoms(time, symptoms, note, formattedDate)
@@ -94,7 +93,6 @@ class SymptomsFragment : Fragment() {
 
 
         viewModel.symptoms.observe(viewLifecycleOwner) { symptoms ->
-
             val selectedSymptoms = symptoms.filter {
                 it.isSelected
             }

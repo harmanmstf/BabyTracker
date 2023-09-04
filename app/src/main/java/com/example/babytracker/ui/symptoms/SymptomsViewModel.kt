@@ -22,23 +22,22 @@ class SymptomsViewModel@Inject constructor(
     private val repository: Repository) : ViewModel() {
 
     private val dataSource = SymptomsDataSource()
-    private val _selectedDate = MutableLiveData<String?>(null)
-
     private val _symptoms = MutableLiveData(dataSource.loadSymptoms())
-
     val symptoms: LiveData<List<SymptomsDetail>> = _symptoms
-
-    private val selectedDate: LiveData<String?> = _selectedDate
-
-    fun setSelectedDate(date: String?) {
-        _selectedDate.value = date
-    }
 
     fun setSymptomSelectStatus(item: SymptomsDetail) {
         _symptoms.value = symptoms.value?.map {
             if (item == it) it.copy(isSelected = it.isSelected.not())
             else it
         }
+    }
+
+
+    private val _selectedDate = MutableLiveData<String?>(null)
+    private val selectedDate: LiveData<String?> = _selectedDate
+
+    fun setSelectedDate(date: String?) {
+        _selectedDate.value = date
     }
 
 
@@ -62,5 +61,4 @@ class SymptomsViewModel@Inject constructor(
     }
 
     val symptomsList: LiveData<List<Symptoms>> = _symptomsList
-
 }

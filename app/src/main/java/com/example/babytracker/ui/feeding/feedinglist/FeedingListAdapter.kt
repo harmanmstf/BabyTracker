@@ -1,7 +1,7 @@
 package com.example.babytracker.ui.feeding.feedinglist
 
+import android.annotation.SuppressLint
 import com.example.babytracker.data.entities.Feeding
-
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -29,10 +29,11 @@ class FeedingListAdapter : ListAdapter<Feeding, FeedingListAdapter.FeedingViewHo
      class FeedingViewHolder(private val binding: FeedingListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("SetTextI18n")
         fun bind(feeding: Feeding) {
-            binding.tvTime.text = feeding.time
-            binding.tvAmount.text = "${feeding.amount} ml"
-            binding.tvNote.text = feeding.note
+            binding.tvTime.text = "time: ${feeding.time}"
+            binding.tvAmount.text = "amount: ${feeding.amount} ml"
+            binding.tvNote.text =  "note: ${feeding.note}"
 
         }
     }

@@ -1,5 +1,6 @@
 package com.example.babytracker.ui.symptoms.symptomslist
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -29,10 +30,11 @@ class SymptomsListAdapter : ListAdapter<Symptoms, SymptomsListAdapter.SymptomsVi
     class SymptomsViewHolder(private val binding: SymptomsListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("SetTextI18n")
         fun bind(symptoms: Symptoms) {
-            binding.tvTime.text = symptoms.time
-            binding.tvSymptoms.text = symptoms.symptomName
-            binding.tvNote.text = symptoms.note
+            binding.tvTime.text = "time: ${symptoms.time}"
+            binding.tvSymptoms.text = "symptoms: ${symptoms.symptomName}"
+            binding.tvNote.text = "note:${symptoms.note}"
         }
     }
 }

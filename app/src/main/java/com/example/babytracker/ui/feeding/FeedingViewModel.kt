@@ -30,6 +30,7 @@ class FeedingViewModel @Inject constructor(private val repository: Repository) :
 
             val feeding = Feeding(time = time, amount = amount, note = note, date = date)
             repository.insertFeeding(feeding)
+
         }
     }
 
