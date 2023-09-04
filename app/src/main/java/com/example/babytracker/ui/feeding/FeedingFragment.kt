@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.babytracker.BabyTrackerApplication
 import com.example.babytracker.databinding.FragmentFeedingBinding
 import com.example.babytracker.util.TimePicker
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -21,16 +22,14 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-
+@AndroidEntryPoint
 class FeedingFragment : Fragment() {
 
     private var _binding: FragmentFeedingBinding? = null
     private val binding get() = _binding!!
 
 
-    private val viewModel: FeedingViewModel by activityViewModels {
-        FeedingViewModel.FeedingViewModelFactory((activity?.application as BabyTrackerApplication).database.itemDao())
-    }
+    private val viewModel: FeedingViewModel by activityViewModels ()
 
     private val timePicker: TimePicker by lazy { TimePicker(requireContext()) }
     private val calendar = Calendar.getInstance()

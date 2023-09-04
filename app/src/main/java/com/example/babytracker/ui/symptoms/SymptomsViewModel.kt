@@ -11,12 +11,15 @@ import com.example.babytracker.data.entities.Sleep
 import com.example.babytracker.data.entities.Symptoms
 import com.example.babytracker.data.local.BabyTrackerDao
 import com.example.babytracker.model.SymptomsDetail
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-
-class SymptomsViewModel(private val repository: Repository) : ViewModel() {
+@HiltViewModel
+class SymptomsViewModel@Inject constructor(
+    private val repository: Repository) : ViewModel() {
 
     private val dataSource = SymptomsDataSource()
     private val _selectedDate = MutableLiveData<String?>(null)
@@ -25,7 +28,7 @@ class SymptomsViewModel(private val repository: Repository) : ViewModel() {
 
     val symptoms: LiveData<List<SymptomsDetail>> = _symptoms
 
-    val selectedDate: LiveData<String?> = _selectedDate
+    private val selectedDate: LiveData<String?> = _selectedDate
 
     fun setSelectedDate(date: String?) {
         _selectedDate.value = date
@@ -61,15 +64,4 @@ class SymptomsViewModel(private val repository: Repository) : ViewModel() {
 
     val symptomsList: LiveData<List<Symptoms>> = _symptomsList
 
-
-    class SymptomsViewModelFactory(private val database: BabyTrackerDao) :
-        ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(SymptomsViewModel::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                return SymptomsViewModel(Repository(database)) as T
-            }
-            throw IllegalArgumentException("Unknown ViewModel class")
-        }
-    }
 }

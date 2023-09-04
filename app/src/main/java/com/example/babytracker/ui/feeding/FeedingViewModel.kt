@@ -9,12 +9,14 @@ import com.example.babytracker.data.Repository
 import com.example.babytracker.data.entities.Feeding
 import com.example.babytracker.data.entities.Symptoms
 import com.example.babytracker.data.local.BabyTrackerDao
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-
-class FeedingViewModel(private val repository: Repository) : ViewModel() {
+@HiltViewModel
+class FeedingViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
     private val _selectedDate = MutableLiveData<String?>(null)
     private val selectedDate: LiveData<String?> = _selectedDate
@@ -41,14 +43,4 @@ class FeedingViewModel(private val repository: Repository) : ViewModel() {
 
     val feedings: LiveData<List<Feeding>> = _feedings
 
-
-    class FeedingViewModelFactory(private val database: BabyTrackerDao) : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(FeedingViewModel::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                return FeedingViewModel(Repository(database)) as T
-            }
-            throw IllegalArgumentException("Unknown ViewModel class")
-        }
-    }
 }

@@ -7,8 +7,9 @@ import com.example.babytracker.data.entities.Symptoms
 import com.example.babytracker.data.local.BabyTrackerDao
 import com.example.babytracker.data.local.ItemRoomDatabase
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class Repository(private val datasource: BabyTrackerDao) {
+class Repository @Inject constructor (private val datasource: BabyTrackerDao) {
 
     fun insertFeeding(feeding: Feeding) {
         datasource.insertFeeding(feeding)

@@ -12,17 +12,16 @@ import com.example.babytracker.R
 import com.example.babytracker.databinding.FragmentSleepListBinding
 import com.example.babytracker.ui.feeding.feedinglist.FeedingListAdapter
 import com.example.babytracker.ui.sleep.SleepViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class SleepListFragment : Fragment() {
 
     private var _binding: FragmentSleepListBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var sleepAdapter: SleepListAdapter
-    private val viewModel: SleepViewModel by activityViewModels {
-        SleepViewModel.SleepViewModelFactory((activity?.application as BabyTrackerApplication).database.itemDao())
-    }
+    private val viewModel: SleepViewModel by activityViewModels ()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

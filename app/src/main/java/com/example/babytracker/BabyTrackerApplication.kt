@@ -2,9 +2,17 @@ package com.example.babytracker
 
 import android.app.Application
 import com.example.babytracker.data.local.ItemRoomDatabase
+import dagger.hilt.android.HiltAndroidApp
+import timber.log.Timber
 
-class BabyTrackerApplication: Application() {
 
+@HiltAndroidApp
+class BabyTrackerApplication : Application() {
 
-        val database: ItemRoomDatabase by lazy { ItemRoomDatabase.getDatabase(this) }
+    override fun onCreate() {
+        super.onCreate()
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
     }
+}

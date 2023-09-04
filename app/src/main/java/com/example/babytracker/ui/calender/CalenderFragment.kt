@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.babytracker.BabyTrackerApplication
 import com.example.babytracker.R
 import com.example.babytracker.databinding.FragmentCalenderBinding
@@ -17,10 +18,12 @@ import com.example.babytracker.ui.feeding.FeedingViewModel
 import com.example.babytracker.ui.sleep.SleepViewModel
 import com.example.babytracker.ui.symptoms.SymptomsViewModel
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
+@AndroidEntryPoint
 class CalenderFragment : Fragment() {
 
     private var _binding: FragmentCalenderBinding? = null
@@ -28,17 +31,11 @@ class CalenderFragment : Fragment() {
 
     private val calendar = Calendar.getInstance()
 
-    private val feedingViewModel: FeedingViewModel by activityViewModels {
-        FeedingViewModel.FeedingViewModelFactory((activity?.application as BabyTrackerApplication).database.itemDao())
-    }
+    private val feedingViewModel: FeedingViewModel by activityViewModels ()
 
-    private val sleepViewModel: SleepViewModel by activityViewModels {
-        SleepViewModel.SleepViewModelFactory((activity?.application as BabyTrackerApplication).database.itemDao())
-    }
+    private val sleepViewModel: SleepViewModel by activityViewModels ()
 
-    private val symptomsViewModel: SymptomsViewModel by activityViewModels {
-        SymptomsViewModel.SymptomsViewModelFactory((activity?.application as BabyTrackerApplication).database.itemDao())
-    }
+    private val symptomsViewModel: SymptomsViewModel by activityViewModels ()
 
 
 
@@ -54,7 +51,9 @@ class CalenderFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        binding.btnBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
         updateDateTitle()
 
         // Open DatePickerDialog when tvDateTitle is clicked

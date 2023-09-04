@@ -12,7 +12,9 @@ import com.example.babytracker.BabyTrackerApplication
 import com.example.babytracker.data.SymptomsDataSource
 import com.example.babytracker.databinding.FragmentSymptomsDetailBinding
 import com.example.babytracker.ui.symptoms.SymptomsViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SymptomsDetailFragment : Fragment() {
 
     private var _binding: FragmentSymptomsDetailBinding? = null
@@ -21,9 +23,7 @@ class SymptomsDetailFragment : Fragment() {
     private val dataSource = SymptomsDataSource()
 
 
-    private val viewModel: SymptomsViewModel by activityViewModels {
-        SymptomsViewModel.SymptomsViewModelFactory((activity?.application as BabyTrackerApplication).database.itemDao())
-    }
+    private val viewModel: SymptomsViewModel by activityViewModels ()
 
 
     override fun onCreateView(

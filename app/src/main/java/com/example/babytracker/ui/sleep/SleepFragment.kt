@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.babytracker.BabyTrackerApplication
 import com.example.babytracker.databinding.FragmentSleepBinding
 import com.example.babytracker.util.TimePicker
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -21,14 +22,13 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
+@AndroidEntryPoint
 class SleepFragment : Fragment() {
 
     private var _binding: FragmentSleepBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: SleepViewModel by activityViewModels {
-        SleepViewModel.SleepViewModelFactory((activity?.application as BabyTrackerApplication).database.itemDao())
-    }
+    private val viewModel: SleepViewModel by activityViewModels ()
 
     private val timePicker: TimePicker by lazy { TimePicker(requireContext()) }
     private val calendar = Calendar.getInstance()

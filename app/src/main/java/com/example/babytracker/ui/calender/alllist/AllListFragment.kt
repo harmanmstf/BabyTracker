@@ -16,26 +16,21 @@ import com.example.babytracker.ui.sleep.SleepViewModel
 import com.example.babytracker.ui.sleep.sleeplist.SleepListAdapter
 import com.example.babytracker.ui.symptoms.SymptomsViewModel
 import com.example.babytracker.ui.symptoms.symptomslist.SymptomsListAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class AllListFragment : Fragment() {
 
     private var _binding: FragmentAllListBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var sleepAdapter: SleepListAdapter
-    private val sleepViewModel: SleepViewModel by activityViewModels {
-        SleepViewModel.SleepViewModelFactory((activity?.application as BabyTrackerApplication).database.itemDao())
-    }
+    private val sleepViewModel: SleepViewModel by activityViewModels()
     private lateinit var feedingAdapter: FeedingListAdapter
-    private val feedingViewModel: FeedingViewModel by activityViewModels {
-        FeedingViewModel.FeedingViewModelFactory((activity?.application as BabyTrackerApplication).database.itemDao())
-    }
+    private val feedingViewModel: FeedingViewModel by activityViewModels ()
 
     private lateinit var symptomsAdapter: SymptomsListAdapter
-    private val symptomsViewModel: SymptomsViewModel by activityViewModels {
-        SymptomsViewModel.SymptomsViewModelFactory((activity?.application as BabyTrackerApplication).database.itemDao())
-    }
+    private val symptomsViewModel: SymptomsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

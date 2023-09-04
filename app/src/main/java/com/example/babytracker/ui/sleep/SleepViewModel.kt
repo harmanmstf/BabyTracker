@@ -9,12 +9,15 @@ import com.example.babytracker.data.Repository
 import com.example.babytracker.data.entities.Feeding
 import com.example.babytracker.data.entities.Sleep
 import com.example.babytracker.data.local.BabyTrackerDao
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-
-class SleepViewModel(private val repository: Repository) : ViewModel() {
+@HiltViewModel
+class SleepViewModel@Inject constructor(
+    private val repository: Repository) : ViewModel() {
 
     private val _selectedDate = MutableLiveData<String?>(null)
     val selectedDate: LiveData<String?> = _selectedDate
@@ -41,16 +44,4 @@ class SleepViewModel(private val repository: Repository) : ViewModel() {
 
     val sleeps: LiveData<List<Sleep>> = _sleeps
 
-
-
-
-    class SleepViewModelFactory(private val database: BabyTrackerDao) : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(SleepViewModel::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                return SleepViewModel(Repository(database)) as T
-            }
-            throw IllegalArgumentException("Unknown ViewModel class")
-        }
-    }
 }

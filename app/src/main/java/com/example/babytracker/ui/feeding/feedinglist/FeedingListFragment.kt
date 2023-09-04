@@ -10,15 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.babytracker.BabyTrackerApplication
 import com.example.babytracker.databinding.FragmentFeedingListBinding
 import com.example.babytracker.ui.feeding.FeedingViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class FeedingListFragment : Fragment() {
 
 
     private lateinit var feedingAdapter: FeedingListAdapter
-    private val viewModel: FeedingViewModel by activityViewModels {
-        FeedingViewModel.FeedingViewModelFactory((activity?.application as BabyTrackerApplication).database.itemDao())
-    }
+    private val viewModel: FeedingViewModel by activityViewModels ()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
