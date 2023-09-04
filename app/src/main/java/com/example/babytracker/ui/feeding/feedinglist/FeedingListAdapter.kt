@@ -33,7 +33,7 @@ class FeedingListAdapter : ListAdapter<Feeding, FeedingListAdapter.FeedingViewHo
             binding.tvTime.text = feeding.time
             binding.tvAmount.text = "${feeding.amount} ml"
             binding.tvNote.text = feeding.note
-            binding.tvDate.text = feeding.date
+
         }
     }
 }
