@@ -1,22 +1,17 @@
 package com.example.babytracker.ui.feeding
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.babytracker.databinding.FragmentFeedingBinding
+import com.example.babytracker.util.LoadingState
 import com.example.babytracker.util.TimePicker
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -31,6 +26,8 @@ class FeedingFragment : Fragment() {
 
     private val timePicker: TimePicker by lazy { TimePicker(requireContext()) }
     private val calendar = Calendar.getInstance()
+
+    private lateinit var loadingState: LoadingState
 
 
     override fun onCreateView(
@@ -60,25 +57,20 @@ class FeedingFragment : Fragment() {
                 val time = tvFeedingTime.text.toString()
                 val amount = etAmount.text.toString()
                 val note = etNote.text.toString()
-
                 val dateFormat = SimpleDateFormat("E, MMM dd", Locale.getDefault())
                 val formattedDate = dateFormat.format(calendar.time)
-                viewModel.saveFeeding(time, amount, note, formattedDate)
 
-                vLoading.visibility = View.VISIBLE
-                progressBar.visibility = View.VISIBLE
+                if (time.isEmpty() || amount.isEmpty()) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Please fill in both time and amount.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    viewModel.saveFeeding(time, amount, note, formattedDate)
 
-                CoroutineScope(Dispatchers.IO).launch {
-                    delay(2000)
-
-                    withContext(Dispatchers.Main) {
-                        progressBar.visibility = View.GONE
-                        tvSaved.visibility = View.VISIBLE
-
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            findNavController().navigateUp()
-                        }, 1000)
-                    }
+                    loadingState = LoadingState(progressBar, tvSaved, findNavController())
+                    loadingState.showLoadingState()
                 }
             }
         }

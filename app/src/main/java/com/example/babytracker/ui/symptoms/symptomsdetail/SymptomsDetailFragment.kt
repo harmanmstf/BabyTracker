@@ -36,7 +36,7 @@ class SymptomsDetailFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        binding.btnSaveFeeding.setOnClickListener {
+        binding.btnSaveSymptomsDetail.setOnClickListener {
             findNavController().navigateUp()
         }
 

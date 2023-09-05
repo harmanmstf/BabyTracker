@@ -129,7 +129,7 @@
         app:layout_constraintTop_toTopOf="@+id/vNote" />
 
     <Button
-        android:id="@+id/btnSaveFeeding"
+        android:id="@+id/btnSaveSymptoms"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginHorizontal="24dp"
