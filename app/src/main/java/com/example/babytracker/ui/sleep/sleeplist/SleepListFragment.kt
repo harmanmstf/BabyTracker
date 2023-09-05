@@ -34,7 +34,6 @@ class SleepListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Initialize RecyclerView and Adapter
         sleepAdapter = SleepListAdapter()
         binding.rvSleep.adapter = sleepAdapter
 

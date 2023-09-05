@@ -14,16 +14,14 @@ class TimePicker(private val context: Context) {
     fun showTimePickerDialog(timeTextView: TextView) {
         val timePickerDialog = TimePickerDialog(
             context,
-            TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
-                // Update the calendar with the selected time
+            { _, hourOfDay, minute ->
                 calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
                 calendar.set(Calendar.MINUTE, minute)
-                // Update the TextView with the selected time
                 updateTimeTextView(timeTextView)
             },
             calendar.get(Calendar.HOUR_OF_DAY),
             calendar.get(Calendar.MINUTE),
-            false // 24-hour format (true for 24-hour format)
+            false
         )
         timePickerDialog.show()
     }

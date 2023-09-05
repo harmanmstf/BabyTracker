@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.babytracker.R
 import com.example.babytracker.databinding.FragmentOnboarding1Binding
@@ -38,7 +37,4 @@ class Onboarding1Fragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-
-
 }

@@ -3,12 +3,9 @@ package com.example.babytracker.ui.feeding
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.switchMap
-import com.example.babytracker.data.Repository
+import com.example.babytracker.data.repository.Repository
 import com.example.babytracker.data.entities.Feeding
-import com.example.babytracker.data.entities.Symptoms
-import com.example.babytracker.data.local.BabyTrackerDao
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

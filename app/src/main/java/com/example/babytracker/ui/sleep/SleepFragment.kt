@@ -28,7 +28,7 @@ class SleepFragment : Fragment() {
     private var _binding: FragmentSleepBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: SleepViewModel by activityViewModels ()
+    private val viewModel: SleepViewModel by activityViewModels()
 
     private val timePicker: TimePicker by lazy { TimePicker(requireContext()) }
     private val calendar = Calendar.getInstance()
@@ -44,47 +44,46 @@ class SleepFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnBack.setOnClickListener {
-            findNavController().navigateUp()
-        }
+        binding.apply {
+            btnBack.setOnClickListener {
+                findNavController().navigateUp()
+            }
 
 
-        // Set a click listener to show the time picker dialog
-        binding.vFellSleep.setOnClickListener {
-            timePicker.showTimePickerDialog(binding.tvFellSleep)
-            timePicker.updateTimeTextView(binding.tvFellSleep)
-        }
+            vFellSleep.setOnClickListener {
+                timePicker.showTimePickerDialog(tvFellSleep)
+                timePicker.updateTimeTextView(tvFellSleep)
+            }
 
-        binding.vWokeUp.setOnClickListener {
-            timePicker.showTimePickerDialog(binding.tvWokeUp)
-            timePicker.updateTimeTextView(binding.tvWokeUp)
-        }
-
-
-        binding.btnSaveSleep.setOnClickListener {
-            val fellSleepTime = binding.tvFellSleep.text.toString()
-            val wokeUpTime = binding.tvWokeUp.text.toString()
-            val note = binding.etNote.text.toString()
+            vWokeUp.setOnClickListener {
+                timePicker.showTimePickerDialog(tvWokeUp)
+                timePicker.updateTimeTextView(tvWokeUp)
+            }
 
 
+            btnSaveSleep.setOnClickListener {
+                val fellSleepTime = tvFellSleep.text.toString()
+                val wokeUpTime = tvWokeUp.text.toString()
+                val note = etNote.text.toString()
 
-            val dateFormat = SimpleDateFormat("E, MMM dd", Locale.getDefault())
-            val formattedDate = dateFormat.format(calendar.time)
-            viewModel.saveSleep(fellSleepTime, wokeUpTime, note, formattedDate)
+                val dateFormat = SimpleDateFormat("E, MMM dd", Locale.getDefault())
+                val formattedDate = dateFormat.format(calendar.time)
+                viewModel.saveSleep(fellSleepTime, wokeUpTime, note, formattedDate)
 
-            binding.vLoading.visibility = View.VISIBLE
-            binding.progressBar.visibility = View.VISIBLE
+                vLoading.visibility = View.VISIBLE
+                progressBar.visibility = View.VISIBLE
 
-            CoroutineScope(Dispatchers.IO).launch {
-                delay(2000)
+                CoroutineScope(Dispatchers.IO).launch {
+                    delay(2000)
 
-                withContext(Dispatchers.Main) {
-                    binding.progressBar.visibility = View.GONE
-                    binding.tvSaved.visibility = View.VISIBLE
+                    withContext(Dispatchers.Main) {
+                        progressBar.visibility = View.GONE
+                        tvSaved.visibility = View.VISIBLE
 
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        findNavController().navigateUp()
-                    }, 1000)
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            findNavController().navigateUp()
+                        }, 1000)
+                    }
                 }
             }
         }

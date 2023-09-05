@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.babytracker.databinding.FeedingListItemBinding
 
 
-
 class FeedingListAdapter : ListAdapter<Feeding, FeedingListAdapter.FeedingViewHolder>(
     FeedingDiffCallback()
 ) {
@@ -26,14 +25,14 @@ class FeedingListAdapter : ListAdapter<Feeding, FeedingListAdapter.FeedingViewHo
         holder.bind(currentFeeding)
     }
 
-     class FeedingViewHolder(private val binding: FeedingListItemBinding) :
+    class FeedingViewHolder(private val binding: FeedingListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         @SuppressLint("SetTextI18n")
         fun bind(feeding: Feeding) {
             binding.tvTime.text = "time: ${feeding.time}"
             binding.tvAmount.text = "amount: ${feeding.amount} ml"
-            binding.tvNote.text =  "note: ${feeding.note}"
+            binding.tvNote.text = "note: ${feeding.note}"
 
         }
     }

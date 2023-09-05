@@ -1,7 +1,8 @@
-package com.example.babytracker
+package com.example.babytracker.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.babytracker.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

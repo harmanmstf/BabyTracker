@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.babytracker.BabyTrackerApplication
-import com.example.babytracker.data.SymptomsDataSource
 import com.example.babytracker.databinding.FragmentSymptomsDetailBinding
 import com.example.babytracker.ui.symptoms.SymptomsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,9 +17,6 @@ class SymptomsDetailFragment : Fragment() {
 
     private var _binding: FragmentSymptomsDetailBinding? = null
     private val binding get() = _binding!!
-
-    private val dataSource = SymptomsDataSource()
-
 
     private val viewModel: SymptomsViewModel by activityViewModels ()
 

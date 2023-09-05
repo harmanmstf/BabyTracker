@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.example.babytracker.BabyTrackerApplication
 import com.example.babytracker.R
 import com.example.babytracker.databinding.FragmentSymptomsBinding
 import com.example.babytracker.util.TimePicker
@@ -46,61 +45,62 @@ class SymptomsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnBack.setOnClickListener {
-            findNavController().navigateUp()
-        }
+        binding.apply {
 
-        binding.vSymptoms.setOnClickListener {
-            findNavController().navigate(R.id.action_symptomsFragment_to_symptomsDetailFragment)
-        }
+            btnBack.setOnClickListener {
+                findNavController().navigateUp()
+            }
 
-        // val selectedSymptoms = findNavController().previousBackStackEntry?.savedStateHandle?.get<String>("symptomsNames")
-        //  if (selectedSymptoms != null) {
-        //    binding.tvSymptoms.text = selectedSymptoms.toString()}
-
-        binding.vTime.setOnClickListener {
-            timePicker.showTimePickerDialog(binding.tvSymptomsTime)
-            timePicker.updateTimeTextView(binding.tvSymptomsTime)
-        }
+            vSymptoms.setOnClickListener {
+                findNavController().navigate(R.id.action_symptomsFragment_to_symptomsDetailFragment)
+            }
 
 
-        binding.btnSaveFeeding.setOnClickListener {
-            val time = binding.tvSymptomsTime.text.toString()
-            val symptoms = binding.tvSymptoms.text.toString()
-            val note = binding.etNote.text.toString()
+            vTime.setOnClickListener {
+                timePicker.showTimePickerDialog(tvSymptomsTime)
+                timePicker.updateTimeTextView(tvSymptomsTime)
+            }
 
 
-            val dateFormat = SimpleDateFormat("E, MMM dd", Locale.getDefault())
-            val formattedDate = dateFormat.format(calendar.time)
-            viewModel.saveSymptoms(time, symptoms, note, formattedDate)
+            btnSaveFeeding.setOnClickListener {
+                val time = tvSymptomsTime.text.toString()
+                val symptoms = tvSymptoms.text.toString()
+                val note = etNote.text.toString()
 
-            binding.vLoading.visibility = View.VISIBLE
-            binding.progressBar.visibility = View.VISIBLE
 
-            CoroutineScope(Dispatchers.IO).launch {
-                delay(2000)
+                val dateFormat = SimpleDateFormat("E, MMM dd", Locale.getDefault())
+                val formattedDate = dateFormat.format(calendar.time)
+                viewModel.saveSymptoms(time, symptoms, note, formattedDate)
 
-                withContext(Dispatchers.Main) {
-                    binding.progressBar.visibility = View.GONE
-                    binding.tvSaved.visibility = View.VISIBLE
+                vLoading.visibility = View.VISIBLE
+                progressBar.visibility = View.VISIBLE
 
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        findNavController().navigateUp()
-                    }, 1000)
+                CoroutineScope(Dispatchers.IO).launch {
+                    delay(2000)
+
+                    withContext(Dispatchers.Main) {
+                        progressBar.visibility = View.GONE
+                        tvSaved.visibility = View.VISIBLE
+
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            findNavController().navigateUp()
+                        }, 1000)
+                    }
+                }
+            }
+
+
+            viewModel.symptoms.observe(viewLifecycleOwner) { symptoms ->
+                val selectedSymptoms = symptoms.filter {
+                    it.isSelected
+                }
+
+                tvSymptoms.text = selectedSymptoms.joinToString(", ") {
+                    requireContext().getString(it.nameSymptom)
                 }
             }
         }
 
-
-        viewModel.symptoms.observe(viewLifecycleOwner) { symptoms ->
-            val selectedSymptoms = symptoms.filter {
-                it.isSelected
-            }
-
-            binding.tvSymptoms.text = selectedSymptoms.joinToString(", ") {
-                requireContext().getString(it.nameSymptom)
-            }
-        }
     }
 
     override fun onDestroyView() {

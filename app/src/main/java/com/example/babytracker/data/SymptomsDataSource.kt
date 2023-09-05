@@ -14,6 +14,6 @@ class SymptomsDataSource {
             SymptomsDetail(R.drawable.img_nausea, R.string.nausea),
             SymptomsDetail(R.drawable.img_cough, R.string.cough),
             SymptomsDetail(R.drawable.img_fever, R.string.fever),
-            )
+        )
     }
 }

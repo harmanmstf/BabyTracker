@@ -7,12 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.babytracker.BabyTrackerApplication
-import com.example.babytracker.R
 import com.example.babytracker.databinding.FragmentSymptomsListBinding
-import com.example.babytracker.ui.feeding.FeedingViewModel
-import com.example.babytracker.ui.feeding.feedinglist.FeedingListAdapter
-import com.example.babytracker.ui.sleep.sleeplist.SleepListAdapter
 import com.example.babytracker.ui.symptoms.SymptomsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,13 +18,13 @@ class SymptomsListFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var symptomsAdapter: SymptomsListAdapter
-    private val viewModel: SymptomsViewModel by activityViewModels ()
+    private val viewModel: SymptomsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        _binding = FragmentSymptomsListBinding.inflate(inflater,container, false)
+        _binding = FragmentSymptomsListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -37,7 +32,6 @@ class SymptomsListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        // Initialize RecyclerView and Adapter
         symptomsAdapter = SymptomsListAdapter()
         binding.rvSymptoms.adapter = symptomsAdapter
 
@@ -47,8 +41,6 @@ class SymptomsListFragment : Fragment() {
                 symptomsAdapter.submitList(symptoms)
             }
         }
-
-
     }
 
     override fun onDestroyView() {

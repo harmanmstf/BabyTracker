@@ -1,7 +1,7 @@
 package com.example.babytracker.di
 
 import android.content.Context
-import com.example.babytracker.data.Repository
+import com.example.babytracker.data.repository.Repository
 import com.example.babytracker.data.local.BabyTrackerDao
 import com.example.babytracker.data.local.ItemRoomDatabase
 import dagger.Module
@@ -18,7 +18,8 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideDatabase(@ApplicationContext appContext: Context) = ItemRoomDatabase.getDatabase(appContext)
+    fun provideDatabase(@ApplicationContext appContext: Context) =
+        ItemRoomDatabase.getDatabase(appContext)
 
     @Singleton
     @Provides
@@ -27,6 +28,7 @@ object AppModule {
     @Singleton
     @Provides
     fun provideRepository(
-                          localDataSource: BabyTrackerDao) =
+        localDataSource: BabyTrackerDao,
+    ) =
         Repository(localDataSource)
 }

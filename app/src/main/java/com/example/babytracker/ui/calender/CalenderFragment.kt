@@ -56,7 +56,7 @@ class CalenderFragment : Fragment() {
         }
         updateDateTitle()
 
-        // Open DatePickerDialog when tvDateTitle is clicked
+
         binding.tvDateTitle.setOnClickListener {
             showDatePickerDialog()
         }
@@ -72,13 +72,8 @@ class CalenderFragment : Fragment() {
                 1 -> tab.icon= ContextCompat.getDrawable(tabLayout.context, R.drawable.btn_feeding_selected)
                 2 -> tab.icon= ContextCompat.getDrawable(tabLayout.context, R.drawable.btn_sleep_selected)
                 3 -> tab.icon=ContextCompat.getDrawable(tabLayout.context, R.drawable.btn_symptons_selected)
-                 else -> tab.icon
-
             }
-
-
         }.attach()
-
     }
 
     override fun onDestroyView() {
@@ -91,13 +86,10 @@ class CalenderFragment : Fragment() {
         val today = Calendar.getInstance()
         val datePickerDialog = DatePickerDialog(
             requireContext(),
-            DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                // Update the calendar with the selected date
+            { _, year, month, dayOfMonth ->
                 calendar.set(year, month, dayOfMonth)
-                // Update the tvDateTitle with the selected date
+
                 updateDateTitle()
-
-
             },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
@@ -117,5 +109,4 @@ class CalenderFragment : Fragment() {
         sleepViewModel.setSelectedDate(formattedDate)
         symptomsViewModel.setSelectedDate(formattedDate)
     }
-
 }

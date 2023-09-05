@@ -6,9 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.babytracker.data.entities.Feeding
 import com.example.babytracker.data.entities.Sleep
-import com.example.babytracker.databinding.FeedingListItemBinding
 import com.example.babytracker.databinding.SleepListItemBinding
 
 

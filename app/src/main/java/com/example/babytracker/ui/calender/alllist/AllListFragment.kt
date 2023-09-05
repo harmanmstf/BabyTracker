@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.babytracker.BabyTrackerApplication
-import com.example.babytracker.R
 import com.example.babytracker.databinding.FragmentAllListBinding
 import com.example.babytracker.ui.feeding.FeedingViewModel
 import com.example.babytracker.ui.feeding.feedinglist.FeedingListAdapter
@@ -27,7 +25,7 @@ class AllListFragment : Fragment() {
     private lateinit var sleepAdapter: SleepListAdapter
     private val sleepViewModel: SleepViewModel by activityViewModels()
     private lateinit var feedingAdapter: FeedingListAdapter
-    private val feedingViewModel: FeedingViewModel by activityViewModels ()
+    private val feedingViewModel: FeedingViewModel by activityViewModels()
 
     private lateinit var symptomsAdapter: SymptomsListAdapter
     private val symptomsViewModel: SymptomsViewModel by activityViewModels()
@@ -74,15 +72,10 @@ class AllListFragment : Fragment() {
                 symptomsAdapter.submitList(symptoms)
             }
         }
-
-
-
-
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }

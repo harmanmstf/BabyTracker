@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.babytracker.BabyTrackerApplication
 import com.example.babytracker.databinding.FragmentFeedingListBinding
 import com.example.babytracker.ui.feeding.FeedingViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,6 +14,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FeedingListFragment : Fragment() {
 
+    private var _binding: FragmentFeedingListBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var feedingAdapter: FeedingListAdapter
     private val viewModel: FeedingViewModel by activityViewModels ()
@@ -23,11 +24,13 @@ class FeedingListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentFeedingListBinding.inflate(inflater, container, false)
+        _binding = FragmentFeedingListBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-
-        // Initialize RecyclerView and Adapter
         feedingAdapter = FeedingListAdapter()
         binding.rvFeeding.adapter = feedingAdapter
         binding.rvFeeding.layoutManager = LinearLayoutManager(requireContext())
@@ -37,11 +40,10 @@ class FeedingListFragment : Fragment() {
                 feedingAdapter.submitList(feedings)
             }
         }
+    }
 
-
-
-
-
-        return binding.root
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
