@@ -10,8 +10,9 @@
     <View
         android:id="@+id/imgOnboarding1"
         android:layout_width="0dp"
-        android:layout_height="600dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/img_onboarding1"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,10 +27,10 @@
         android:lineSpacingExtra="-3sp"
         android:text="@string/title_onboarding1"
         android:textAppearance="@style/title_onboarding"
-        app:layout_constraintBottom_toBottomOf="@+id/imgOnboarding1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@id/imgOnboarding1"
+        app:layout_constraintEnd_toEndOf="@id/imgOnboarding1"
+        app:layout_constraintStart_toStartOf="@id/imgOnboarding1"
+        app:layout_constraintTop_toTopOf="@id/imgOnboarding1" />
 
     <TextView
         android:id="@+id/tvDescriptionOnboarding1"
@@ -60,11 +61,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/rectangle_4"
         android:text="@string/next"
         app:backgroundTint="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgSlider1" />

@@ -60,9 +60,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDateTitle"
         app:tabGravity="fill"
-        app:tabIndicatorColor="@null"
+        app:tabIndicatorColor="@color/main"
         app:tabMode="fixed"
-        app:tabIconTint="@null"
+      app:tabSelectedTextColor="@color/main"
         app:tabTextColor="@android:color/darker_gray">
 
         <com.google.android.material.tabs.TabItem
