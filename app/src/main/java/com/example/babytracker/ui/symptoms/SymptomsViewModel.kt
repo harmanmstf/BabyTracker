@@ -30,6 +30,11 @@ class SymptomsViewModel @Inject constructor(
         }
     }
 
+    fun clearSymptomsAndTime() {
+        _symptoms.value = emptyList()
+        _selectedTime.value = ""
+    }
+
 
     private val _selectedDate = MutableLiveData<String?>(null)
     private val selectedDate: LiveData<String?> = _selectedDate
@@ -46,7 +51,8 @@ class SymptomsViewModel @Inject constructor(
                 time = time,
                 symptomName = symptomName,
                 note = note,
-                date = date)
+                date = date
+            )
             repository.insertSymptoms(symptoms)
 
         }
@@ -62,4 +68,11 @@ class SymptomsViewModel @Inject constructor(
     }
 
     val symptomsList: LiveData<List<Symptoms>> = _symptomsList
+
+    private val _selectedTime = MutableLiveData<String>()
+    val selectedTime: LiveData<String> = _selectedTime
+
+    fun updateSelectedTime(time: String) {
+        _selectedTime.value = time
+    }
 }

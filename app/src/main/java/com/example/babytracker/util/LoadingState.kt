@@ -12,7 +12,7 @@ class LoadingState(private val progressBar: View, private val tvSaved: View, pri
         progressBar.visibility = View.VISIBLE
 
         CoroutineScope(Dispatchers.IO).launch {
-            delay(2000)
+            delay(1000)
 
             withContext(Dispatchers.Main) {
                 progressBar.visibility = View.GONE
@@ -20,7 +20,7 @@ class LoadingState(private val progressBar: View, private val tvSaved: View, pri
 
                 Handler(Looper.getMainLooper()).postDelayed({
                     navController.navigateUp()
-                }, 1000)
+                }, 500)
             }
         }
     }

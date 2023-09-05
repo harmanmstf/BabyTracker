@@ -46,16 +46,19 @@ class SymptomsFragment : Fragment() {
 
             btnBack.setOnClickListener {
                 findNavController().navigateUp()
+                viewModel.clearSymptomsAndTime()
             }
 
             vSymptoms.setOnClickListener {
                 findNavController().navigate(R.id.action_symptomsFragment_to_symptomsDetailFragment)
+                viewModel.updateSelectedTime(tvSymptomsTime.text.toString())
             }
 
 
             vTime.setOnClickListener {
                 timePicker.showTimePickerDialog(tvSymptomsTime)
                 timePicker.updateTimeTextView(tvSymptomsTime)
+
             }
 
 
@@ -76,6 +79,7 @@ class SymptomsFragment : Fragment() {
                     viewModel.saveSymptoms(time, symptoms, note, formattedDate)
                     loadingState = LoadingState(progressBar, tvSaved, findNavController())
                     loadingState.showLoadingState()
+                    viewModel.clearSymptomsAndTime()
                 }
             }
 
@@ -88,6 +92,10 @@ class SymptomsFragment : Fragment() {
                 tvSymptoms.text = selectedSymptoms.joinToString(", ") {
                     requireContext().getString(it.nameSymptom)
                 }
+            }
+
+            viewModel.selectedTime.observe(viewLifecycleOwner) { time ->
+                tvSymptomsTime.text = time
             }
         }
     }
