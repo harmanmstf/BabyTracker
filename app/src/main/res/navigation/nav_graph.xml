@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_onboarding2Fragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_onboarding2Fragment_to_inappFragment"
+            app:destination="@id/inappFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -85,7 +88,15 @@
         android:name="com.example.babytracker.ui.calender.CalenderFragment"
         android:label="fragment_calender"
         tools:layout="@layout/fragment_calender" />
-
+    <fragment
+        android:id="@+id/inappFragment"
+        android:name="com.example.babytracker.ui.inapp.InappFragment"
+        android:label="fragment_inapp"
+        tools:layout="@layout/fragment_inapp" >
+        <action
+            android:id="@+id/action_inappFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 
 
 </navigation>

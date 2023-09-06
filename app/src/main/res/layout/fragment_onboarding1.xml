@@ -10,8 +10,9 @@
     <View
         android:id="@+id/imgOnboarding1"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/img_onboarding1"
+        android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,22 +23,22 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="45dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="70dp"
         android:gravity="center"
         android:lineSpacingExtra="-3sp"
         android:text="@string/title_onboarding1"
         android:textAppearance="@style/title_onboarding"
-        app:layout_constraintBottom_toBottomOf="@id/imgOnboarding1"
-        app:layout_constraintEnd_toEndOf="@id/imgOnboarding1"
-        app:layout_constraintStart_toStartOf="@id/imgOnboarding1"
-        app:layout_constraintTop_toTopOf="@id/imgOnboarding1" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvDescriptionOnboarding1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="25dp"
         android:gravity="center"
         android:lineSpacingExtra="3sp"
         android:text="@string/description_onboarding1"
@@ -50,7 +51,7 @@
         android:id="@+id/imgSlider1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:src="@drawable/img_slider1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,13 +62,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginVertical="20dp"
         android:background="@drawable/rectangle_4"
         android:text="@string/next"
         app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgSlider1" />
+        app:layout_constraintTop_toBottomOf="@+id/imgSlider1"
+        app:layout_constraintBottom_toBottomOf="parent"
+       />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

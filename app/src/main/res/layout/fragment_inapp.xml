@@ -96,40 +96,55 @@
         app:layout_constraintEnd_toStartOf="@id/tv3"
         app:layout_constraintTop_toTopOf="@id/tv3" />
 
-    <View
-        android:id="@+id/Annual"
-        android:layout_width="0dp"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/annual"
+        android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="80dp"
-        android:background="@drawable/rectangle_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv3" />
+        app:layout_constraintTop_toBottomOf="@id/tv3"
+        android:checkable="true"
+        app:cardBackgroundColor="@color/card_background"
+        app:cardCornerRadius="24dp"
+        app:strokeColor="@drawable/card_stroke_color"
+        app:strokeWidth="2dp"
+        app:checkedIcon="@null"
+        app:cardElevation="0dp"/>
 
-    <TextView
-        android:id="@+id/tvAnnual"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:text="@string/annual"
-        android:textAppearance="@style/annual"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/Annual"
-        app:layout_constraintStart_toStartOf="@id/Annual"
-        app:layout_constraintTop_toTopOf="@id/Annual" />
 
-    <TextView
-        android:id="@+id/tvPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:text="@string/_30"
-        android:textAppearance="@style/annual"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/Annual"
-        app:layout_constraintEnd_toEndOf="@id/Annual"
-        app:layout_constraintTop_toTopOf="@id/Annual" />
+
+
+            <TextView
+                android:id="@+id/tvAnnual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="@string/annual"
+                android:textAppearance="@style/annual"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/annual"
+                app:layout_constraintStart_toStartOf="@id/annual"
+                app:layout_constraintTop_toTopOf="@id/annual" />
+
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:text="@string/_30"
+                android:textAppearance="@style/annual"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/annual"
+                app:layout_constraintEnd_toEndOf="@id/annual"
+                app:layout_constraintTop_toTopOf="@id/annual" />
+
+
+
+
+
+
 
     <Button
         android:id="@+id/btnStart"
@@ -143,7 +158,7 @@
         app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Annual" />
+        app:layout_constraintTop_toBottomOf="@id/annual" />
 
     <View
         android:id="@+id/divider"
