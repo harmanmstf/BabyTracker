@@ -10,9 +10,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.okation.aivideocreator.R
 import com.okation.aivideocreator.databinding.FragmentInappBinding
+import com.okation.aivideocreator.ui.symptoms.SymptomsViewModel
 import com.revenuecat.purchases.Package
 import com.revenuecat.purchases.PurchaseParams
 import com.revenuecat.purchases.Purchases
@@ -25,6 +27,7 @@ class InappFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var revPackage: Package
+    private val viewModel: PremiumViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -49,6 +52,7 @@ class InappFragment : Fragment() {
             val termsText = getString(R.string.terms_of_use_inapp)
             setUnderlinedText(tvTerms, termsText)
 
+            setButtonEnabled(false)
 
             btnClose.setOnClickListener {
                 findNavController().navigate(R.id.action_inappFragment_to_homeFragment)
@@ -68,6 +72,7 @@ class InappFragment : Fragment() {
                 Purchases.sharedInstance.getOfferingsWith({
                 }) { offerings ->
                     annual.setOnClickListener {
+                        annual.isChecked = true
                         btnStart.run {
                             isClickable = true
                             isActivated = true
@@ -81,18 +86,35 @@ class InappFragment : Fragment() {
 
 
                 btnStart.setOnClickListener {
+                    setButtonEnabled(false)
                     Purchases.sharedInstance.purchaseWith(
                         PurchaseParams.Builder(requireActivity(), revPackage).build(),
                         onError = { error, _ ->
                             Log.e("errorCode: ${error.code}", error.message)
-                            //setButtonEnabled(true)
+                            setButtonEnabled(true)
                         },
                         onSuccess = { _, _ ->
+
+
                             findNavController().navigate(R.id.action_inappFragment_to_homeFragment)
                         }
                     )
                 }
             }
+        }
+    }
+
+    private fun setButtonEnabled(enabled: Boolean) {
+        binding.btnStart.apply {
+            isClickable = enabled
+            isActivated = enabled
+            isEnabled = enabled
+        }
+
+        binding.btnClose.apply {
+            isClickable = enabled
+            isActivated = enabled
+            isEnabled = enabled
         }
     }
 

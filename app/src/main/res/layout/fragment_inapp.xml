@@ -12,6 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
+        android:clickable="false"
+        android:enabled="false"
         android:src="@drawable/btn_close"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -96,13 +98,15 @@
         app:layout_constraintEnd_toStartOf="@id/tv3"
         app:layout_constraintTop_toTopOf="@id/tv3" />
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/annual"
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="80dp"
         android:checkable="true"
+        android:clickable="true"
+        android:focusable="true"
         app:cardBackgroundColor="@color/card_background"
         app:cardCornerRadius="24dp"
         app:cardElevation="0dp"
@@ -111,32 +115,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv3"
         app:strokeColor="@drawable/card_stroke_color"
-        app:strokeWidth="8dp" />
+        app:strokeWidth="4dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/annualConstraint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvAnnual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="@string/annual"
+                android:textAppearance="@style/annual"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/annualConstraint"
+                app:layout_constraintStart_toStartOf="@id/annualConstraint"
+                app:layout_constraintTop_toTopOf="@id/annualConstraint" />
+
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:text="@string/_30"
+                android:textAppearance="@style/annual"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/annualConstraint"
+                app:layout_constraintEnd_toEndOf="@id/annualConstraint"
+                app:layout_constraintTop_toTopOf="@id/annualConstraint" />
 
 
-    <TextView
-        android:id="@+id/tvAnnual"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:text="@string/annual"
-        android:textAppearance="@style/annual"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/annual"
-        app:layout_constraintStart_toStartOf="@id/annual"
-        app:layout_constraintTop_toTopOf="@id/annual" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/tvPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:text="@string/_30"
-        android:textAppearance="@style/annual"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/annual"
-        app:layout_constraintEnd_toEndOf="@id/annual"
-        app:layout_constraintTop_toTopOf="@id/annual" />
+    </com.google.android.material.card.MaterialCardView>
 
 
     <Button
@@ -144,20 +157,23 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/rectangle_4"
+        android:clickable="false"
         android:text="@string/start"
         android:textAppearance="@style/save"
         app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/annual" />
 
     <View
         android:id="@+id/divider"
-        android:layout_width="5dp"
+        android:layout_width="3dp"
         android:layout_height="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toStartOf="@+id/divider2"
         app:layout_constraintHorizontal_bias="0.5"
@@ -166,7 +182,7 @@
 
     <View
         android:id="@+id/divider2"
-        android:layout_width="5dp"
+        android:layout_width="3dp"
         android:layout_height="30dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"

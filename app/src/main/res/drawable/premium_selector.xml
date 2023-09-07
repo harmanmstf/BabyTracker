@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true">
+        <shape android:shape="rectangle">
+            <!-- Define the background and stroke for the selected state -->
+            <solid android:color="@color/card_background" />
+            <stroke android:width="2dp" android:color="@color/main" />
+            <corners android:radius="24dp" />
+        </shape>
+    </item>
+    <item android:state_selected="false">
+        <shape android:shape="rectangle">
+            <!-- Define the default background -->
+            <solid android:color="@color/card_background" />
+            <corners android:radius="24dp" />
+        </shape>
+    </item>
+</selector>
