@@ -10,7 +10,8 @@
     <View
         android:id="@+id/imgOnboarding2"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/img_onboarding2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,12 +23,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="50dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="70dp"
         android:gravity="center"
         android:lineSpacingExtra="-3sp"
         android:text="@string/title_onboarding2"
         android:textAppearance="@style/title_onboarding"
-        app:layout_constraintBottom_toBottomOf="@+id/imgOnboarding2"
+        app:layout_constraintBottom_toBottomOf="@id/imgOnboarding2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -50,7 +51,7 @@
         android:id="@+id/imgSlider2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="90dp"
         android:src="@drawable/img_slider2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,13 +62,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/rectangle_4"
         android:text="@string/next"
+        android:textAppearance="@style/save"
         app:backgroundTint="@null"
-        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgSlider2" />
+        app:layout_constraintTop_toBottomOf="@+id/imgSlider2"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

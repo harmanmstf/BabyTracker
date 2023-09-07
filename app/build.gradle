@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.babytracker'
+    namespace 'com.okation.aivideocreator'
     compileSdk 34
 
     defaultConfig {
@@ -20,7 +20,7 @@ android {
                 ]
             }
         }
-        applicationId "com.example.babytracker"
+        applicationId "com.okation.aivideocreator"
         minSdk 24
         targetSdk 34
         versionCode 1

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/onboarding1Fragment"
-        android:name="com.example.babytracker.ui.onboarding.Onboarding1Fragment"
+        android:name="com.okation.aivideocreator.ui.onboarding.Onboarding1Fragment"
         android:label="fragment_onboarding1"
         tools:layout="@layout/fragment_onboarding1" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/onboarding2Fragment"
-        android:name="com.example.babytracker.ui.onboarding.Onboarding2Fragment"
+        android:name="com.okation.aivideocreator.ui.onboarding.Onboarding2Fragment"
         android:label="fragment_onboarding2"
         tools:layout="@layout/fragment_onboarding2" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.babytracker.ui.home.HomeFragment"
+        android:name="com.okation.aivideocreator.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -49,22 +49,22 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.babytracker.ui.settings.SettingsFragment"
+        android:name="com.okation.aivideocreator.ui.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/feedingFragment"
-        android:name="com.example.babytracker.ui.feeding.FeedingFragment"
+        android:name="com.okation.aivideocreator.ui.feeding.FeedingFragment"
         android:label="fragment_feeding"
         tools:layout="@layout/fragment_feeding" />
     <fragment
         android:id="@+id/sleepFragment"
-        android:name="com.example.babytracker.ui.sleep.SleepFragment"
+        android:name="com.okation.aivideocreator.ui.sleep.SleepFragment"
         android:label="fragment_sleep"
         tools:layout="@layout/fragment_sleep" />
     <fragment
         android:id="@+id/symptomsFragment"
-        android:name="com.example.babytracker.ui.symptoms.SymptomsFragment"
+        android:name="com.okation.aivideocreator.ui.symptoms.SymptomsFragment"
         android:label="fragment_symptoms"
         tools:layout="@layout/fragment_symptoms" >
         <action
@@ -76,7 +76,7 @@
     </fragment>
     <fragment
         android:id="@+id/symptomsDetailFragment"
-        android:name="com.example.babytracker.ui.symptoms.symptomsdetail.SymptomsDetailFragment"
+        android:name="com.okation.aivideocreator.ui.symptoms.symptomsdetail.SymptomsDetailFragment"
         android:label="fragment_symptoms_detail"
         tools:layout="@layout/fragment_symptoms_detail" >
         <action
@@ -85,12 +85,12 @@
     </fragment>
     <fragment
         android:id="@+id/calenderFragment"
-        android:name="com.example.babytracker.ui.calender.CalenderFragment"
+        android:name="com.okation.aivideocreator.ui.calender.CalenderFragment"
         android:label="fragment_calender"
         tools:layout="@layout/fragment_calender" />
     <fragment
         android:id="@+id/inappFragment"
-        android:name="com.example.babytracker.ui.inapp.InappFragment"
+        android:name="com.okation.aivideocreator.ui.inapp.InappFragment"
         android:label="fragment_inapp"
         tools:layout="@layout/fragment_inapp" >
         <action
