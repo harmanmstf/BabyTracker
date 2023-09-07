@@ -16,8 +16,6 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: PremiumViewModel by activityViewModels()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -50,7 +48,6 @@ class HomeFragment : Fragment() {
                 findNavController().navigate(R.id.action_homeFragment_to_calenderFragment)
             }
         }
-
     }
 
     override fun onDestroyView() {

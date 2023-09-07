@@ -1,5 +1,6 @@
 package com.okation.aivideocreator.ui.inapp
 
+import android.content.Context
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
@@ -14,7 +15,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.okation.aivideocreator.R
 import com.okation.aivideocreator.databinding.FragmentInappBinding
-import com.okation.aivideocreator.ui.symptoms.SymptomsViewModel
 import com.revenuecat.purchases.Package
 import com.revenuecat.purchases.PurchaseParams
 import com.revenuecat.purchases.Purchases
@@ -94,7 +94,12 @@ class InappFragment : Fragment() {
                             setButtonEnabled(true)
                         },
                         onSuccess = { _, _ ->
+                            viewModel.setPremiumStatus(true)
 
+                            val sharedPreferences = requireContext().getSharedPreferences("premium", Context.MODE_PRIVATE)
+                            val editor = sharedPreferences.edit()
+                            editor.putBoolean("is_premium", true)
+                            editor.apply()
 
                             findNavController().navigate(R.id.action_inappFragment_to_homeFragment)
                         }
@@ -106,12 +111,6 @@ class InappFragment : Fragment() {
 
     private fun setButtonEnabled(enabled: Boolean) {
         binding.btnStart.apply {
-            isClickable = enabled
-            isActivated = enabled
-            isEnabled = enabled
-        }
-
-        binding.btnClose.apply {
             isClickable = enabled
             isActivated = enabled
             isEnabled = enabled
