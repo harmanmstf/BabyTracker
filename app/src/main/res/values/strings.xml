@@ -6,7 +6,7 @@
     <string name="description_onboarding1">Get started with tracking your baby\'s \nfeedings, diaper changes, sleep patterns,\n and more…</string>
     <string name="next">Next</string>
     <string name="title_onboarding2">Stay Connected with Caregivers</string>
-    <string name="description_onboarding2">Share access to your baby\'s tracker with\n family members, babysitters,\n or healthcare providers </string>
+    <string name="description_onboarding2">Share access to your baby\'s tracker with\n family members, babysitters, or healthcare\n providers </string>
     <string name="home">Home</string>
     <string name="feeding">Feeding</string>
     <string name="sleep">Sleep</string>
@@ -41,6 +41,14 @@
     <string name="privacy_policy_innapp">Privacy Policy</string>
     <string name="restore_purchase_inapp">Restore Purchase</string>
     <string name="terms_of_use_inapp">Terms of Use</string>
+    <string name="note">Note</string>
+    <string name="woke_up">Woke Up</string>
+    <string name="fell_sleep">Fell Sleep</string>
+    <string name="time">Time</string>
+    <string name="symptoms_tv">Symptoms</string>
+    <string name="time_template">time: %1$s</string>
+    <string name="amount_template">amount: %1$s ml</string>
+    <string name="note_template">note: %1$s</string>
 
 
 </resources>

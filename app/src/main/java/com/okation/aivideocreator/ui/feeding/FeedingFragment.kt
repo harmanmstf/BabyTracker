@@ -1,15 +1,19 @@
 package com.okation.aivideocreator.ui.feeding
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.okation.aivideocreator.databinding.FragmentFeedingBinding
 import com.okation.aivideocreator.util.LoadingState
+import com.okation.aivideocreator.util.SaveState
 import com.okation.aivideocreator.util.TimePicker
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -28,6 +32,7 @@ class FeedingFragment : Fragment() {
     private val calendar = Calendar.getInstance()
 
     private lateinit var loadingState: LoadingState
+    private lateinit var saveState: SaveState
 
 
     override fun onCreateView(
@@ -36,22 +41,27 @@ class FeedingFragment : Fragment() {
     ): View? {
         _binding = FragmentFeedingBinding.inflate(inflater, container, false)
         return binding.root
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         binding.apply {
             btnBack.setOnClickListener {
                 findNavController().navigateUp()
             }
 
-
             vTime.setOnClickListener {
                 timePicker.showTimePickerDialog(tvFeedingTime)
                 timePicker.updateTimeTextView(tvFeedingTime)
             }
 
+            saveState = SaveState(tvFeedingTime, etAmount, btnSaveFeeding)
+            tvFeedingTime.addTextChangedListener(saveState.textWatcher)
+            etAmount.addTextChangedListener(saveState.textWatcher)
 
             btnSaveFeeding.setOnClickListener {
                 val time = tvFeedingTime.text.toString()
@@ -60,20 +70,19 @@ class FeedingFragment : Fragment() {
                 val dateFormat = SimpleDateFormat("E, MMM dd", Locale.getDefault())
                 val formattedDate = dateFormat.format(calendar.time)
 
-                if (time.isEmpty() || amount.isEmpty()) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Please fill in both time and amount.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } else {
-                    viewModel.saveFeeding(time, amount, note, formattedDate)
+                viewModel.saveFeeding(time, amount, note, formattedDate)
 
-                    loadingState = LoadingState(progressBar, tvSaved, findNavController())
-                    loadingState.showLoadingState()
-                }
+                loadingState = LoadingState(vLoading, progressBar, tvSaved, findNavController())
+                loadingState.showLoadingState()
             }
         }
+    }
+
+    private fun updateSaveButtonVisibility() {
+        val time = binding.tvFeedingTime.text.toString()
+        val amount = binding.etAmount.text.toString()
+        val isFieldsNotEmpty = time.isNotEmpty() && amount.isNotEmpty()
+        binding.btnSaveFeeding.isVisible = isFieldsNotEmpty
     }
 
 

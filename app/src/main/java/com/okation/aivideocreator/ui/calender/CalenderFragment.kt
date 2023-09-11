@@ -31,9 +31,7 @@ class CalenderFragment : Fragment() {
     private val calendar = Calendar.getInstance()
 
     private val feedingViewModel: FeedingViewModel by activityViewModels ()
-
     private val sleepViewModel: SleepViewModel by activityViewModels ()
-
     private val symptomsViewModel: SymptomsViewModel by activityViewModels ()
 
 
@@ -46,15 +44,15 @@ class CalenderFragment : Fragment() {
         return binding.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        updateDateTitle()
 
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
-        updateDateTitle()
-
 
         binding.tvDateTitle.setOnClickListener {
             showDatePickerDialog()

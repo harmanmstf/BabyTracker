@@ -1,8 +1,13 @@
 package com.okation.aivideocreator.ui
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.view.WindowManager
 import androidx.activity.viewModels
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.navigation.fragment.findNavController
 import com.okation.aivideocreator.R
 import com.okation.aivideocreator.ui.inapp.PremiumViewModel
@@ -18,6 +23,10 @@ import androidx.navigation.findNavController
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+            WindowCompat.setDecorFitsSystemWindows(window, false)
+
+
         setContentView(R.layout.activity_main)
 
         val viewModel: PremiumViewModel by viewModels()

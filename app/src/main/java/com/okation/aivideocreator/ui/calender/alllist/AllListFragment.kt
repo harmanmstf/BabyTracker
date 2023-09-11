@@ -24,6 +24,7 @@ class AllListFragment : Fragment() {
 
     private lateinit var sleepAdapter: SleepListAdapter
     private val sleepViewModel: SleepViewModel by activityViewModels()
+
     private lateinit var feedingAdapter: FeedingListAdapter
     private val feedingViewModel: FeedingViewModel by activityViewModels()
 
@@ -41,35 +42,37 @@ class AllListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.apply {
 
-        feedingAdapter = FeedingListAdapter()
-        binding.rvFeeding.adapter = feedingAdapter
-        binding.rvFeeding.layoutManager = LinearLayoutManager(requireContext())
+            feedingAdapter = FeedingListAdapter()
+            rvFeeding.adapter = feedingAdapter
+            rvFeeding.layoutManager = LinearLayoutManager(requireContext())
 
-        feedingViewModel.feedings.observe(viewLifecycleOwner) { feedings ->
-            feedings?.let {
-                feedingAdapter.submitList(feedings)
+            feedingViewModel.feedings.observe(viewLifecycleOwner) { feedings ->
+                feedings?.let {
+                    feedingAdapter.submitList(feedings)
+                }
             }
-        }
 
 
-        sleepAdapter = SleepListAdapter()
-        binding.rvSleep.adapter = sleepAdapter
-        binding.rvSleep.layoutManager = LinearLayoutManager(requireContext())
+            sleepAdapter = SleepListAdapter()
+            rvSleep.adapter = sleepAdapter
+            rvSleep.layoutManager = LinearLayoutManager(requireContext())
 
-        sleepViewModel.sleeps.observe(viewLifecycleOwner) { sleeps ->
-            sleeps?.let {
-                sleepAdapter.submitList(sleeps)
+            sleepViewModel.sleeps.observe(viewLifecycleOwner) { sleeps ->
+                sleeps?.let {
+                    sleepAdapter.submitList(sleeps)
+                }
             }
-        }
 
 
-        symptomsAdapter = SymptomsListAdapter()
-        binding.rvSymptoms.adapter = symptomsAdapter
-        binding.rvSymptoms.layoutManager = LinearLayoutManager(requireContext())
-        symptomsViewModel.symptomsList.observe(viewLifecycleOwner) { symptoms ->
-            symptoms?.let {
-                symptomsAdapter.submitList(symptoms)
+            symptomsAdapter = SymptomsListAdapter()
+            rvSymptoms.adapter = symptomsAdapter
+            rvSymptoms.layoutManager = LinearLayoutManager(requireContext())
+            symptomsViewModel.symptomsList.observe(viewLifecycleOwner) { symptoms ->
+                symptoms?.let {
+                    symptomsAdapter.submitList(symptoms)
+                }
             }
         }
     }

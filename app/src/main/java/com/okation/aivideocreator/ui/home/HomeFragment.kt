@@ -28,26 +28,16 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-            btnSettings.setOnClickListener {
-                findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
-            }
-
-            btnFeeding.setOnClickListener {
-                findNavController().navigate(R.id.action_homeFragment_to_feedingFragment)
-            }
-
-            btnSleep.setOnClickListener {
-                findNavController().navigate(R.id.action_homeFragment_to_sleepFragment)
-            }
-
-            btnSymptoms.setOnClickListener {
-                findNavController().navigate(R.id.action_homeFragment_to_symptomsFragment)
-            }
-
-            btnCalender.setOnClickListener {
-                findNavController().navigate(R.id.action_homeFragment_to_calenderFragment)
-            }
+            btnSettings.setOnClickListener { navigateToDestination(R.id.action_homeFragment_to_settingsFragment) }
+            btnFeeding.setOnClickListener { navigateToDestination(R.id.action_homeFragment_to_feedingFragment) }
+            btnSleep.setOnClickListener { navigateToDestination(R.id.action_homeFragment_to_sleepFragment) }
+            btnSymptoms.setOnClickListener { navigateToDestination(R.id.action_homeFragment_to_symptomsFragment) }
+            btnCalender.setOnClickListener { navigateToDestination(R.id.action_homeFragment_to_calenderFragment) }
         }
+    }
+
+    private fun navigateToDestination(destinationId: Int) {
+        findNavController().navigate(destinationId)
     }
 
     override fun onDestroyView() {

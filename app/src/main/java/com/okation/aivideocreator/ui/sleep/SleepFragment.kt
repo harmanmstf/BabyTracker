@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.okation.aivideocreator.databinding.FragmentSleepBinding
 import com.okation.aivideocreator.util.LoadingState
+import com.okation.aivideocreator.util.SaveState
 import com.okation.aivideocreator.util.TimePicker
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -28,6 +29,8 @@ class SleepFragment : Fragment() {
     private val calendar = Calendar.getInstance()
 
     private lateinit var loadingState: LoadingState
+    private lateinit var saveState: SaveState
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,11 +43,13 @@ class SleepFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         binding.apply {
+
             btnBack.setOnClickListener {
                 findNavController().navigateUp()
             }
-
 
             vFellSleep.setOnClickListener {
                 timePicker.showTimePickerDialog(tvFellSleep)
@@ -56,6 +61,9 @@ class SleepFragment : Fragment() {
                 timePicker.updateTimeTextView(tvWokeUp)
             }
 
+            saveState = SaveState(tvFellSleep, tvWokeUp, btnSaveSleep)
+            tvFellSleep.addTextChangedListener(saveState.textWatcher)
+            tvWokeUp.addTextChangedListener(saveState.textWatcher)
 
             btnSaveSleep.setOnClickListener {
                 val fellSleepTime = tvFellSleep.text.toString()
@@ -64,18 +72,10 @@ class SleepFragment : Fragment() {
                 val dateFormat = SimpleDateFormat("E, MMM dd", Locale.getDefault())
                 val formattedDate = dateFormat.format(calendar.time)
 
-                if (fellSleepTime.isEmpty() || wokeUpTime.isEmpty()) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Please fill in both fell sleep and woke up time.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } else {
-                    viewModel.saveSleep(fellSleepTime, wokeUpTime, note, formattedDate)
+                viewModel.saveSleep(fellSleepTime, wokeUpTime, note, formattedDate)
 
-                    loadingState = LoadingState(progressBar, tvSaved, findNavController())
-                    loadingState.showLoadingState()
-                }
+                loadingState = LoadingState(vLoading, progressBar, tvSaved, findNavController())
+                loadingState.showLoadingState()
             }
         }
     }

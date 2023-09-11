@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.okation.aivideocreator.R
 import com.okation.aivideocreator.databinding.FragmentSymptomsBinding
 import com.okation.aivideocreator.util.LoadingState
+import com.okation.aivideocreator.util.SaveState
 import com.okation.aivideocreator.util.TimePicker
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -29,6 +30,7 @@ class SymptomsFragment : Fragment() {
     private val calendar = Calendar.getInstance()
 
     private lateinit var loadingState: LoadingState
+    private lateinit var saveState: SaveState
 
 
     override fun onCreateView(
@@ -54,12 +56,14 @@ class SymptomsFragment : Fragment() {
                 viewModel.updateSelectedTime(tvSymptomsTime.text.toString())
             }
 
-
             vTime.setOnClickListener {
                 timePicker.showTimePickerDialog(tvSymptomsTime)
                 timePicker.updateTimeTextView(tvSymptomsTime)
-
             }
+
+            saveState = SaveState(tvSymptomsTime, tvSymptoms, btnSaveSymptoms)
+            tvSymptomsTime.addTextChangedListener(saveState.textWatcher)
+            tvSymptoms.addTextChangedListener(saveState.textWatcher)
 
 
             btnSaveSymptoms.setOnClickListener {
@@ -69,18 +73,10 @@ class SymptomsFragment : Fragment() {
                 val dateFormat = SimpleDateFormat("E, MMM dd", Locale.getDefault())
                 val formattedDate = dateFormat.format(calendar.time)
 
-                if (time.isEmpty() || symptoms.isEmpty()) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Please fill in both time and symptoms",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } else {
-                    viewModel.saveSymptoms(time, symptoms, note, formattedDate)
-                    loadingState = LoadingState(progressBar, tvSaved, findNavController())
-                    loadingState.showLoadingState()
-                    viewModel.clearSymptomsAndTime()
-                }
+                viewModel.saveSymptoms(time, symptoms, note, formattedDate)
+                loadingState = LoadingState(vLoading, progressBar, tvSaved, findNavController())
+                loadingState.showLoadingState()
+                viewModel.clearSymptomsAndTime()
             }
 
 
