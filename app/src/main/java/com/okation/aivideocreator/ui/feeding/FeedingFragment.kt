@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.okation.aivideocreator.databinding.FragmentFeedingBinding
@@ -61,6 +62,8 @@ class FeedingFragment : Fragment() {
             saveState = SaveState(tvFeedingTime, etAmount, btnSaveFeeding)
             tvFeedingTime.addTextChangedListener(saveState.textWatcher)
             etAmount.addTextChangedListener(saveState.textWatcher)
+
+            tvMl.isVisible = !etAmount.text.isNullOrEmpty()
 
             viewModel.isObservingFeeding.observe(viewLifecycleOwner) { isObserving ->
                 isObservingFeeding = isObserving

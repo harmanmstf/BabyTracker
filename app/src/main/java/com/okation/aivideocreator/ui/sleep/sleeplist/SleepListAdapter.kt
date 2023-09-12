@@ -36,9 +36,9 @@ class SleepListAdapter (
 
         @SuppressLint("SetTextI18n")
         fun bind(sleep: Sleep) {
-            binding.tvFellSleep.text = "time: ${sleep.fellSleepTime}"
-            binding.tvWokeUp.text = sleep.wokeUpTime
-            binding.tvSleepNote.text = "note: ${sleep.note }"
+            binding.tvFellSleep.text = "Fell Sleep: ${sleep.fellSleepTime}"
+            binding.tvWokeUp.text = "Woke Up: ${sleep.wokeUpTime}"
+            binding.tvSleepNote.text = "Note: ${sleep.note }"
         }
     }
 }

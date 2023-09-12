@@ -51,9 +51,10 @@ class SymptomsFragment : Fragment() {
         binding.apply {
 
             btnBack.setOnClickListener {
+                viewModel.setIsObservingSymptom(false)
                 findNavController().navigateUp()
                // viewModel.clearSymptomsAndTime()
-                viewModel.setIsObservingSymptom(false)
+
             }
 
             vSymptoms.setOnClickListener {

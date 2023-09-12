@@ -22,25 +22,27 @@
             android:id="@+id/tvSleepNote"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="16dp"
             android:layout_marginHorizontal="18dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginVertical="16dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:textAppearance="@style/input"
-            app:layout_constraintEnd_toStartOf="@id/tvFellSleep"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvFellSleep"
             tools:text="Hello" />
 
         <TextView
             android:id="@+id/tvFellSleep"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_marginVertical="16dp"
-            android:layout_marginEnd="4dp"
-            app:layout_constraintEnd_toStartOf="@+id/separator"
+            android:layout_marginStart="18dp"
             android:textAppearance="@style/input"
-            tools:text="13.13" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="fell sleep:13.13" />
 
         <TextView
             android:id="@+id/tvWokeUp"
@@ -51,18 +53,7 @@
             android:textAppearance="@style/input"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="17.30" />
-
-        <TextView
-            android:id="@+id/separator"
-            android:textAppearance="@style/input"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/separator"
-            app:layout_constraintEnd_toStartOf="@+id/tvWokeUp"
-            android:layout_marginVertical="16dp"
-            android:layout_marginHorizontal="4dp"
-            app:layout_constraintTop_toTopOf="parent"/>
+            tools:text="woke up :17.30" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,9 +36,9 @@ class SymptomsListAdapter(
 
         @SuppressLint("SetTextI18n")
         fun bind(symptoms: Symptoms) {
-            binding.tvTime.text = "time: ${symptoms.time}"
-            binding.tvSymptoms.text = "symptoms: ${symptoms.symptomName}"
-            binding.tvNote.text = "note:${symptoms.note}"
+            binding.tvTime.text = "Time: ${symptoms.time}"
+            binding.tvSymptoms.text = "Symptoms: ${symptoms.symptomName}"
+            binding.tvNote.text = "Note:${symptoms.note}"
         }
     }
 }
