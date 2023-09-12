@@ -44,7 +44,7 @@ class AllListFragment : Fragment() {
 
         binding.apply {
 
-            feedingAdapter = FeedingListAdapter()
+            feedingAdapter = FeedingListAdapter() {feedingViewModel.setId(it.id)}
             rvFeeding.adapter = feedingAdapter
             rvFeeding.layoutManager = LinearLayoutManager(requireContext())
 

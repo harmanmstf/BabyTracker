@@ -17,7 +17,6 @@ class LoadingState(private val vLoading: View, private val progressBar: View, pr
             delay(1000)
 
             withContext(Dispatchers.Main) {
-                vLoading.visibility = View.GONE
                 progressBar.visibility = View.GONE
                 tvSaved.visibility = View.VISIBLE
 
@@ -28,4 +27,3 @@ class LoadingState(private val vLoading: View, private val progressBar: View, pr
         }
     }
 }
-

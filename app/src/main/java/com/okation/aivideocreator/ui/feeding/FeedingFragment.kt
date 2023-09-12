@@ -34,6 +34,8 @@ class FeedingFragment : Fragment() {
     private lateinit var loadingState: LoadingState
     private lateinit var saveState: SaveState
 
+    private var feedingId: Int? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,31 +65,83 @@ class FeedingFragment : Fragment() {
             tvFeedingTime.addTextChangedListener(saveState.textWatcher)
             etAmount.addTextChangedListener(saveState.textWatcher)
 
+            observeFeeding()
+
+
+
             btnSaveFeeding.setOnClickListener {
-                val time = tvFeedingTime.text.toString()
-                val amount = etAmount.text.toString()
-                val note = etNote.text.toString()
-                val dateFormat = SimpleDateFormat("E, MMM dd", Locale.getDefault())
-                val formattedDate = dateFormat.format(calendar.time)
-
-                viewModel.saveFeeding(time, amount, note, formattedDate)
-
-                loadingState = LoadingState(vLoading, progressBar, tvSaved, findNavController())
-                loadingState.showLoadingState()
+                if(feedingId == null){
+                    saveFeedingItem()
+                } else {
+                    updateFeedingItem()
+                }
             }
         }
-    }
-
-    private fun updateSaveButtonVisibility() {
-        val time = binding.tvFeedingTime.text.toString()
-        val amount = binding.etAmount.text.toString()
-        val isFieldsNotEmpty = time.isNotEmpty() && amount.isNotEmpty()
-        binding.btnSaveFeeding.isVisible = isFieldsNotEmpty
     }
 
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun observeFeeding() {
+        viewModel.feeding.observe(viewLifecycleOwner) { feeding ->
+            feeding?.let {
+                // Populate etAmount and tvFeedingTime
+                binding.etAmount.text = Editable.Factory.getInstance().newEditable(feeding.amount)
+                binding.tvFeedingTime.text = feeding.time
+                binding.etNote.text = Editable.Factory.getInstance().newEditable(feeding.note)
+
+                feedingId = feeding.id
+
+            }
+        }
+    }
+
+    private fun updateFeedingItem() {
+        val time = binding.tvFeedingTime.text.toString()
+        val amount = binding.etAmount.text.toString()
+        val note = binding.etNote.text.toString()
+        val dateFormat = SimpleDateFormat("E, MMM dd", Locale.getDefault())
+        val formattedDate = dateFormat.format(calendar.time)
+
+        loadingState = LoadingState(
+            binding.vLoading,
+            binding.progressBar,
+            binding.tvSaved,
+            findNavController()
+        )
+        loadingState.showLoadingState()
+
+        viewModel.feeding.observe(viewLifecycleOwner) { feeding ->
+            feeding?.let {
+                // Modify the properties of the retrieved item with the new values
+                feeding.time = time
+                feeding.amount = amount
+                feeding.note = note
+                feeding.date = formattedDate
+
+                // Check if the ID is not null (assuming it's an Int)
+                feeding.id.let { id ->
+                    // Update the item in the database with the provided ID
+                    viewModel.updateFeeding(id, time, amount, note, formattedDate)
+                }
+            }
+        }
+    }
+
+    private fun saveFeedingItem () {
+        binding.apply {val time = tvFeedingTime.text.toString()
+            val amount = etAmount.text.toString()
+            val note = etNote.text.toString()
+            val dateFormat = SimpleDateFormat("E, MMM dd", Locale.getDefault())
+            val formattedDate = dateFormat.format(calendar.time)
+
+            viewModel.saveFeeding(time, amount, note, formattedDate)
+
+            loadingState = LoadingState(vLoading, progressBar, tvSaved, findNavController())
+            loadingState.showLoadingState()  }
+
     }
 }

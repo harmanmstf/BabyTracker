@@ -9,12 +9,20 @@ import javax.inject.Inject
 
 class Repository @Inject constructor(private val datasource: BabyTrackerDao) {
 
-    fun insertFeeding(feeding: Feeding) {
+    suspend fun insertFeeding(feeding: Feeding) {
         datasource.insertFeeding(feeding)
     }
 
     fun getFeedings(selectedDate: String): LiveData<List<Feeding>> {
         return datasource.getFeedings(selectedDate)
+    }
+
+    fun getFeeding(id: Int): LiveData<Feeding> {
+        return datasource.getFeeding(id)
+    }
+
+    suspend fun updateFeeding(feeding: Feeding) {
+        datasource.updateFeeding(feeding)
     }
 
     fun insertSleep(sleep: Sleep) {

@@ -10,7 +10,7 @@ import com.okation.aivideocreator.data.entities.Symptoms
 
 @Database(
     entities = [Feeding::class, Sleep::class, Symptoms::class],
-    version = 4,
+    version = 5,
     exportSchema = false
 )
 abstract class ItemRoomDatabase : RoomDatabase() {

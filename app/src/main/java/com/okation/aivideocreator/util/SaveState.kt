@@ -3,7 +3,6 @@ package com.okation.aivideocreator.util
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import androidx.core.view.isVisible
 

@@ -6,9 +6,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "feeding")
 data class Feeding(
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
-    val time: String,
-    val amount: String,
-    val note: String,
-    val date: String
+    var id: Int = 0,
+    var time: String,
+    var amount: String,
+    var note: String,
+    var date: String
 )

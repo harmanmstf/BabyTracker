@@ -87,7 +87,11 @@
         android:id="@+id/calenderFragment"
         android:name="com.okation.aivideocreator.ui.calender.CalenderFragment"
         android:label="fragment_calender"
-        tools:layout="@layout/fragment_calender" />
+        tools:layout="@layout/fragment_calender" >
+        <action
+            android:id="@+id/action_calenderFragment_to_feedingFragment"
+            app:destination="@id/feedingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/inappFragment"
         android:name="com.okation.aivideocreator.ui.inapp.InappFragment"

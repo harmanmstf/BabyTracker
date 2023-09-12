@@ -49,6 +49,7 @@
     <string name="time_template">time: %1$s</string>
     <string name="amount_template">amount: %1$s ml</string>
     <string name="note_template">note: %1$s</string>
+    <string name="tue_feb_12">Tue, Feb 12</string>
 
 
 </resources>

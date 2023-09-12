@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.okation.aivideocreator.R
 import com.okation.aivideocreator.databinding.FragmentFeedingListBinding
 import com.okation.aivideocreator.ui.feeding.FeedingViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +33,9 @@ class FeedingListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        feedingAdapter = FeedingListAdapter()
+        feedingAdapter = FeedingListAdapter{viewModel.setId(it.id)
+            findNavController().navigate(R.id.action_calenderFragment_to_feedingFragment)
+        }
         binding.rvFeeding.adapter = feedingAdapter
         binding.rvFeeding.layoutManager = LinearLayoutManager(requireContext())
 

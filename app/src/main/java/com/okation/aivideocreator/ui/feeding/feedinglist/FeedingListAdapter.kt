@@ -8,9 +8,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.okation.aivideocreator.databinding.FeedingListItemBinding
+import com.okation.aivideocreator.model.SymptomsDetail
+import com.okation.aivideocreator.ui.symptoms.symptomsdetail.SymptomsDetailFragment
 
 
-class FeedingListAdapter : ListAdapter<Feeding, FeedingListAdapter.FeedingViewHolder>(
+class FeedingListAdapter(
+    private val onItemClicked: (Feeding) -> Unit
+) : ListAdapter<Feeding, FeedingListAdapter.FeedingViewHolder>(
     FeedingDiffCallback()
 ) {
 
@@ -22,6 +26,9 @@ class FeedingListAdapter : ListAdapter<Feeding, FeedingListAdapter.FeedingViewHo
 
     override fun onBindViewHolder(holder: FeedingViewHolder, position: Int) {
         val currentFeeding = getItem(position)
+        holder.itemView.setOnClickListener {
+            onItemClicked(currentFeeding)
+        }
         holder.bind(currentFeeding)
     }
 
@@ -47,3 +54,4 @@ class FeedingDiffCallback : DiffUtil.ItemCallback<Feeding>() {
         return oldItem == newItem
     }
 }
+

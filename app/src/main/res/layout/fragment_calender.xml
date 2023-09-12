@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="14dp"
-        android:text="Tue, Feb 12"
+        android:text="@string/tue_feb_12"
         android:textAppearance="@style/date_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,7 +71,6 @@
             android:text="All" />
 
         <com.google.android.material.tabs.TabItem
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@drawable/btn_feeding_unselected" />
