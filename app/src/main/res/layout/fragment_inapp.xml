@@ -222,5 +222,11 @@
         app:layout_constraintStart_toEndOf="@id/divider2"
         app:layout_constraintTop_toTopOf="@id/divider" />
 
+    <WebView
+        android:id="@+id/webView"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
