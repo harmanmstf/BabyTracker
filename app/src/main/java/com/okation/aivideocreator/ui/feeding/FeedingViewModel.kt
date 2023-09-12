@@ -31,6 +31,16 @@ class FeedingViewModel @Inject constructor(private val repository: Repository) :
         }
     }
 
+    private val _feedings = selectedDate.switchMap { selectedDate ->
+        if (selectedDate != null) {
+            repository.getFeedings(selectedDate)
+        } else {
+            MutableLiveData()
+        }
+    }
+
+    val feedings: LiveData<List<Feeding>> = _feedings
+
     fun updateFeeding(id: Int, time: String, amount: String, note: String, date: String) {
         viewModelScope.launch {
 
@@ -38,9 +48,6 @@ class FeedingViewModel @Inject constructor(private val repository: Repository) :
             repository.updateFeeding(feeding)
         }
     }
-
-
-
 
 
     private val _id = MutableLiveData<Int?>(null)
@@ -58,22 +65,14 @@ class FeedingViewModel @Inject constructor(private val repository: Repository) :
         }
     }
 
-    fun getFeeding(id: Int): LiveData<Feeding> {
-        return repository.getFeeding(id)
-    }
-
     val feeding: LiveData<Feeding> = _feeding
 
 
 
-    private val _feedings = selectedDate.switchMap { selectedDate ->
-        if (selectedDate != null) {
-            repository.getFeedings(selectedDate)
-        } else {
-            MutableLiveData()
-        }
+    private val _isObservingFeeding = MutableLiveData<Boolean?>(null)
+    val isObservingFeeding: LiveData<Boolean?> = _isObservingFeeding
+
+    fun setIsObservingFeeding(value: Boolean?) {
+        _isObservingFeeding.value = value
     }
-
-    val feedings: LiveData<List<Feeding>> = _feedings
-
 }

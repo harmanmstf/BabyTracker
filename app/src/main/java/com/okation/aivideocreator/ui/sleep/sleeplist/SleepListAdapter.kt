@@ -6,11 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.okation.aivideocreator.data.entities.Feeding
 import com.okation.aivideocreator.data.entities.Sleep
 import com.okation.aivideocreator.databinding.SleepListItemBinding
 
 
-class SleepListAdapter : ListAdapter<Sleep, SleepListAdapter.SleepViewHolder>(
+class SleepListAdapter (
+    private val onItemClicked: (Sleep) -> Unit
+) : ListAdapter<Sleep, SleepListAdapter.SleepViewHolder>(
     SleepDiffCallback()
 ) {
 
@@ -22,6 +25,9 @@ class SleepListAdapter : ListAdapter<Sleep, SleepListAdapter.SleepViewHolder>(
 
     override fun onBindViewHolder(holder: SleepViewHolder, position: Int) {
         val currentSleep = getItem(position)
+        holder.itemView.setOnClickListener {
+            onItemClicked(currentSleep)
+        }
         holder.bind(currentSleep)
     }
 

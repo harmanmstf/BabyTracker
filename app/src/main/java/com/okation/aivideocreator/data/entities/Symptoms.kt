@@ -6,9 +6,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "symptoms")
 data class Symptoms(
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
-    val time: String,
-    val symptomName: String,
-    val note: String,
-    val date: String
+    var id: Int = 0,
+    var time: String,
+    var symptomName: String,
+    var note: String,
+    var date: String
 )

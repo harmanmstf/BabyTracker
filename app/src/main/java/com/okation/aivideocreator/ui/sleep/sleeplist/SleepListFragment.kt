@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.okation.aivideocreator.R
 import com.okation.aivideocreator.databinding.FragmentSleepListBinding
+import com.okation.aivideocreator.ui.feeding.feedinglist.FeedingListAdapter
 import com.okation.aivideocreator.ui.sleep.SleepViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,7 +34,12 @@ class SleepListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sleepAdapter = SleepListAdapter()
+        sleepAdapter = SleepListAdapter{
+            viewModel.setId(it.id)
+            viewModel.setIsObservingSleep(true)
+            findNavController().navigate(R.id.action_calenderFragment_to_sleepFragment)
+
+        }
         binding.rvSleep.adapter = sleepAdapter
 
         binding.rvSleep.layoutManager = LinearLayoutManager(requireContext())

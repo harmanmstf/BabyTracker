@@ -1,6 +1,7 @@
 package com.okation.aivideocreator.ui.symptoms
 
 import android.os.Bundle
+import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +33,9 @@ class SymptomsFragment : Fragment() {
     private lateinit var loadingState: LoadingState
     private lateinit var saveState: SaveState
 
+    private var symptomId: Int? = null
+    private var isObservingSymptom: Boolean? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +52,8 @@ class SymptomsFragment : Fragment() {
 
             btnBack.setOnClickListener {
                 findNavController().navigateUp()
-                viewModel.clearSymptomsAndTime()
+               // viewModel.clearSymptomsAndTime()
+                viewModel.setIsObservingSymptom(false)
             }
 
             vSymptoms.setOnClickListener {
@@ -66,17 +71,21 @@ class SymptomsFragment : Fragment() {
             tvSymptoms.addTextChangedListener(saveState.textWatcher)
 
 
-            btnSaveSymptoms.setOnClickListener {
-                val time = tvSymptomsTime.text.toString()
-                val symptoms = tvSymptoms.text.toString()
-                val note = etNote.text.toString()
-                val dateFormat = SimpleDateFormat("E, MMM dd", Locale.getDefault())
-                val formattedDate = dateFormat.format(calendar.time)
+            viewModel.isObservingSymptom.observe(viewLifecycleOwner) { isObserving ->
+                isObservingSymptom = isObserving
+                observeSymptom()
+            }
 
-                viewModel.saveSymptoms(time, symptoms, note, formattedDate)
-                loadingState = LoadingState(vLoading, progressBar, tvSaved, findNavController())
-                loadingState.showLoadingState()
-                viewModel.clearSymptomsAndTime()
+
+            btnSaveSymptoms.setOnClickListener {
+                if (symptomId == null) {
+                    saveSymptomItem()
+                } else {
+                    updateSymptomItem()
+                }
+                viewModel.setIsObservingSymptom(false)
+               // viewModel.clearSymptomsAndTime()
+
             }
 
 
@@ -99,5 +108,57 @@ class SymptomsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun observeSymptom() {
+        binding.apply {
+            if (isObservingSymptom == true) {
+                viewModel.symptom.observe(viewLifecycleOwner) { symptom ->
+                    symptom?.let {
+                        tvSymptoms.text = symptom.symptomName
+                        tvSymptomsTime.text = symptom.time
+                        etNote.text = Editable.Factory.getInstance().newEditable(symptom.note)
+                        symptomId = symptom.id
+                    }
+                }
+            } else {
+                tvSymptoms.text = null
+                tvSymptomsTime.text = null
+                etNote.text = null
+                symptomId = null
+            }
+        }
+
+    }
+
+    private fun updateSymptomItem() {
+        binding.apply {
+            val time = tvSymptomsTime.text.toString()
+            val symptoms = tvSymptoms.text.toString()
+            val note = etNote.text.toString()
+            val dateFormat = SimpleDateFormat("E, MMM dd", Locale.getDefault())
+            val formattedDate = dateFormat.format(calendar.time)
+            val id = symptomId
+
+            loadingState = LoadingState(vLoading, progressBar, tvSaved, findNavController())
+            loadingState.showLoadingState()
+
+            viewModel.updateSymptom(id!!, time, symptoms, note, formattedDate)
+        }
+    }
+
+    private fun saveSymptomItem() {
+        binding.apply {
+            val time = tvSymptomsTime.text.toString()
+            val symptoms = tvSymptoms.text.toString()
+            val note = etNote.text.toString()
+            val dateFormat = SimpleDateFormat("E, MMM dd", Locale.getDefault())
+            val formattedDate = dateFormat.format(calendar.time)
+
+            viewModel.saveSymptoms(time, symptoms, note, formattedDate)
+
+            loadingState = LoadingState(vLoading, progressBar, tvSaved, findNavController())
+            loadingState.showLoadingState()
+        }
     }
 }

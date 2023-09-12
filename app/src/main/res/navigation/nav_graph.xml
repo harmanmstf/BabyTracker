@@ -70,9 +70,6 @@
         <action
             android:id="@+id/action_symptomsFragment_to_symptomsDetailFragment"
             app:destination="@id/symptomsDetailFragment" />
-        <argument
-            android:name="symptomsNames"
-            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/symptomsDetailFragment"
@@ -91,6 +88,12 @@
         <action
             android:id="@+id/action_calenderFragment_to_feedingFragment"
             app:destination="@id/feedingFragment" />
+        <action
+            android:id="@+id/action_calenderFragment_to_symptomsFragment"
+            app:destination="@id/symptomsFragment" />
+        <action
+            android:id="@+id/action_calenderFragment_to_sleepFragment"
+            app:destination="@id/sleepFragment" />
     </fragment>
     <fragment
         android:id="@+id/inappFragment"

@@ -1,6 +1,7 @@
 package com.okation.aivideocreator.ui.sleep
 
 import android.os.Bundle
+import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -31,6 +32,9 @@ class SleepFragment : Fragment() {
     private lateinit var loadingState: LoadingState
     private lateinit var saveState: SaveState
 
+    private var sleepId: Int? = null
+    private var isObservingSleep: Boolean? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +52,7 @@ class SleepFragment : Fragment() {
         binding.apply {
 
             btnBack.setOnClickListener {
+                viewModel.setIsObservingSleep(false)
                 findNavController().navigateUp()
             }
 
@@ -65,17 +70,19 @@ class SleepFragment : Fragment() {
             tvFellSleep.addTextChangedListener(saveState.textWatcher)
             tvWokeUp.addTextChangedListener(saveState.textWatcher)
 
+            viewModel.isObservingSleep.observe(viewLifecycleOwner) { isObserving ->
+                isObservingSleep = isObserving
+                observeSleep()
+            }
+
+
             btnSaveSleep.setOnClickListener {
-                val fellSleepTime = tvFellSleep.text.toString()
-                val wokeUpTime = tvWokeUp.text.toString()
-                val note = etNote.text.toString()
-                val dateFormat = SimpleDateFormat("E, MMM dd", Locale.getDefault())
-                val formattedDate = dateFormat.format(calendar.time)
-
-                viewModel.saveSleep(fellSleepTime, wokeUpTime, note, formattedDate)
-
-                loadingState = LoadingState(vLoading, progressBar, tvSaved, findNavController())
-                loadingState.showLoadingState()
+                if (sleepId == null) {
+                    saveSleepItem()
+                } else {
+                    updateSleepItem()
+                }
+                viewModel.setIsObservingSleep(false)
             }
         }
     }
@@ -83,5 +90,58 @@ class SleepFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+
+    private fun observeSleep() {
+        binding.apply {
+            if (isObservingSleep == true) {
+                viewModel.sleep.observe(viewLifecycleOwner) { sleep ->
+                    sleep?.let {
+                        tvFellSleep.text = sleep.fellSleepTime
+                        tvWokeUp.text = sleep.wokeUpTime
+                        etNote.text = Editable.Factory.getInstance().newEditable(sleep.note)
+                        sleepId = sleep.id
+                    }
+                }
+            } else {
+                tvFellSleep.text = null
+                tvWokeUp.text = null
+                etNote.text = null
+                sleepId = null
+            }
+        }
+
+    }
+
+    private fun updateSleepItem() {
+        binding.apply {
+            val fellSleep = tvFellSleep.text.toString()
+            val wokeUp = tvWokeUp.text.toString()
+            val note = etNote.text.toString()
+            val dateFormat = SimpleDateFormat("E, MMM dd", Locale.getDefault())
+            val formattedDate = dateFormat.format(calendar.time)
+            val id = sleepId
+
+            loadingState = LoadingState(vLoading, progressBar, tvSaved, findNavController())
+            loadingState.showLoadingState()
+
+            viewModel.updateSleep(id!!, fellSleep, wokeUp, note, formattedDate)
+        }
+    }
+
+    private fun saveSleepItem() {
+        binding.apply {
+            val fellSleep = tvFellSleep.text.toString()
+            val wokeUp = tvWokeUp.text.toString()
+            val note = etNote.text.toString()
+            val dateFormat = SimpleDateFormat("E, MMM dd", Locale.getDefault())
+            val formattedDate = dateFormat.format(calendar.time)
+
+            viewModel.saveSleep(fellSleep, wokeUp, note, formattedDate)
+
+            loadingState = LoadingState(vLoading, progressBar, tvSaved, findNavController())
+            loadingState.showLoadingState()
+        }
     }
 }

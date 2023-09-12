@@ -4,8 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
+import androidx.lifecycle.viewModelScope
 import com.okation.aivideocreator.data.repository.Repository
 import com.okation.aivideocreator.data.SymptomsDataSource
+import com.okation.aivideocreator.data.entities.Feeding
 import com.okation.aivideocreator.data.entities.Symptoms
 import com.okation.aivideocreator.model.SymptomsDetail
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -74,5 +76,38 @@ class SymptomsViewModel @Inject constructor(
 
     fun updateSelectedTime(time: String) {
         _selectedTime.value = time
+    }
+
+    fun updateSymptom(id: Int, time: String, symptomName: String, note: String, date: String) {
+        viewModelScope.launch {
+
+            val symptom = Symptoms(id = id, time = time, symptomName = symptomName, note = note, date = date)
+            repository.updateSymptom(symptom)
+        }
+    }
+
+
+    private val _id = MutableLiveData<Int?>(null)
+    private val id: LiveData<Int?> = _id
+
+    fun setId(id: Int?) {
+        _id.value = id
+    }
+
+    private val _symptom = id.switchMap { id ->
+        if (id != null) {
+            repository.getSymptom(id)
+        } else {
+            MutableLiveData()
+        }
+    }
+
+    val symptom: LiveData<Symptoms> = _symptom
+
+    private val _isObservingSymptom = MutableLiveData<Boolean?>(null)
+    val isObservingSymptom: LiveData<Boolean?> = _isObservingSymptom
+
+    fun setIsObservingSymptom(value: Boolean?) {
+        _isObservingSymptom.value = value
     }
 }

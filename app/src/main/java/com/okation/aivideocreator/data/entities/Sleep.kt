@@ -6,9 +6,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "sleep")
 data class Sleep(
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
-    val fellSleepTime: String,
-    val wokeUpTime: String,
-    val note: String,
-    val date: String
+    var id: Int = 0,
+    var fellSleepTime: String,
+    var wokeUpTime: String,
+    var note: String,
+    var date: String
 )

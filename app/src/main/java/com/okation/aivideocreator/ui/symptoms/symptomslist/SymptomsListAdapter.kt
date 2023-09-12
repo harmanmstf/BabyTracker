@@ -6,11 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.okation.aivideocreator.data.entities.Feeding
 import com.okation.aivideocreator.data.entities.Symptoms
 import com.okation.aivideocreator.databinding.SymptomsListItemBinding
 
 
-class SymptomsListAdapter : ListAdapter<Symptoms, SymptomsListAdapter.SymptomsViewHolder>(
+class SymptomsListAdapter(
+    private val onItemClicked: (Symptoms) -> Unit
+) : ListAdapter<Symptoms, SymptomsListAdapter.SymptomsViewHolder>(
     SymptomsDiffCallback()
 ) {
 
@@ -22,6 +25,9 @@ class SymptomsListAdapter : ListAdapter<Symptoms, SymptomsListAdapter.SymptomsVi
 
     override fun onBindViewHolder(holder: SymptomsViewHolder, position: Int) {
         val currentSymptoms = getItem(position)
+        holder.itemView.setOnClickListener {
+            onItemClicked(currentSymptoms)
+        }
         holder.bind(currentSymptoms)
     }
 

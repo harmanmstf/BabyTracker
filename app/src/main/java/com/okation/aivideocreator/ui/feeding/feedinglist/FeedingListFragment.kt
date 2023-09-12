@@ -33,9 +33,12 @@ class FeedingListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        feedingAdapter = FeedingListAdapter{viewModel.setId(it.id)
+        feedingAdapter = FeedingListAdapter{
+            viewModel.setId(it.id)
+            viewModel.setIsObservingFeeding(true)
             findNavController().navigate(R.id.action_calenderFragment_to_feedingFragment)
         }
+
         binding.rvFeeding.adapter = feedingAdapter
         binding.rvFeeding.layoutManager = LinearLayoutManager(requireContext())
 

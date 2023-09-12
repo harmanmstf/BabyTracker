@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.okation.aivideocreator.R
 import com.okation.aivideocreator.databinding.FragmentSymptomsListBinding
 import com.okation.aivideocreator.ui.symptoms.SymptomsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,7 +34,11 @@ class SymptomsListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        symptomsAdapter = SymptomsListAdapter()
+        symptomsAdapter = SymptomsListAdapter{
+            viewModel.setId(it.id)
+            viewModel.setIsObservingSymptom(true)
+            findNavController().navigate(R.id.action_calenderFragment_to_symptomsFragment)
+        }
         binding.rvSymptoms.adapter = symptomsAdapter
 
         binding.rvSymptoms.layoutManager = LinearLayoutManager(requireContext())

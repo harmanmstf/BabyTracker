@@ -25,6 +25,7 @@ class Repository @Inject constructor(private val datasource: BabyTrackerDao) {
         datasource.updateFeeding(feeding)
     }
 
+
     fun insertSleep(sleep: Sleep) {
         datasource.insertSleep(sleep)
     }
@@ -33,11 +34,28 @@ class Repository @Inject constructor(private val datasource: BabyTrackerDao) {
         return datasource.getSleeps(selectedDate)
     }
 
+    fun getSleep(id: Int): LiveData<Sleep> {
+        return datasource.getSleep(id)
+    }
+
+    suspend fun updateSleep(sleep: Sleep) {
+        datasource.updateSleep(sleep)
+    }
+
+
     fun insertSymptoms(symptoms: Symptoms) {
         datasource.insertSymptoms(symptoms)
     }
 
     fun getSymptoms(selectedDate: String): LiveData<List<Symptoms>> {
         return datasource.getSymptoms(selectedDate)
+    }
+
+    fun getSymptom(id: Int): LiveData<Symptoms> {
+        return datasource.getSymptom(id)
+    }
+
+    suspend fun updateSymptom(symptoms: Symptoms) {
+        datasource.updateSymptom(symptoms)
     }
 }

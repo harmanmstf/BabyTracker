@@ -20,17 +20,31 @@ interface BabyTrackerDao {
     suspend fun insertFeeding(feeding: Feeding)
 
     @Update
-     suspend fun updateFeeding(feeding: Feeding)
+    suspend fun updateFeeding(feeding: Feeding)
+
 
     @Query("SELECT * FROM sleep WHERE date = :selectedDate")
     fun getSleeps(selectedDate: String): LiveData<List<Sleep>>
 
+    @Query("SELECT * from sleep WHERE id = :id")
+    fun getSleep(id: Int): LiveData<Sleep>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertSleep(sleep: Sleep)
+
+    @Update
+    suspend fun updateSleep(sleep: Sleep)
+
 
     @Query("SELECT * FROM symptoms WHERE date = :selectedDate")
     fun getSymptoms(selectedDate: String): LiveData<List<Symptoms>>
 
+    @Query("SELECT * from symptoms WHERE id = :id")
+    fun getSymptom(id: Int): LiveData<Symptoms>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertSymptoms(symptoms: Symptoms)
+
+    @Update
+    suspend fun updateSymptom(symptoms: Symptoms)
 }

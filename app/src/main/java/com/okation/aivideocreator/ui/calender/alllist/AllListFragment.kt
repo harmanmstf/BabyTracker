@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.okation.aivideocreator.R
 import com.okation.aivideocreator.databinding.FragmentAllListBinding
 import com.okation.aivideocreator.ui.feeding.FeedingViewModel
 import com.okation.aivideocreator.ui.feeding.feedinglist.FeedingListAdapter
@@ -44,7 +46,11 @@ class AllListFragment : Fragment() {
 
         binding.apply {
 
-            feedingAdapter = FeedingListAdapter() {feedingViewModel.setId(it.id)}
+            feedingAdapter = FeedingListAdapter{
+                feedingViewModel.setId(it.id)
+                feedingViewModel.setIsObservingFeeding(true)
+                findNavController().navigate(R.id.action_calenderFragment_to_feedingFragment)
+            }
             rvFeeding.adapter = feedingAdapter
             rvFeeding.layoutManager = LinearLayoutManager(requireContext())
 
@@ -55,7 +61,11 @@ class AllListFragment : Fragment() {
             }
 
 
-            sleepAdapter = SleepListAdapter()
+            sleepAdapter = SleepListAdapter{
+                sleepViewModel.setId(it.id)
+                sleepViewModel.setIsObservingSleep(true)
+                findNavController().navigate(R.id.action_calenderFragment_to_sleepFragment)
+            }
             rvSleep.adapter = sleepAdapter
             rvSleep.layoutManager = LinearLayoutManager(requireContext())
 
@@ -66,7 +76,11 @@ class AllListFragment : Fragment() {
             }
 
 
-            symptomsAdapter = SymptomsListAdapter()
+            symptomsAdapter = SymptomsListAdapter{
+                symptomsViewModel.setId(it.id)
+                symptomsViewModel.setIsObservingSymptom(true)
+                findNavController().navigate(R.id.action_calenderFragment_to_symptomsFragment)
+            }
             rvSymptoms.adapter = symptomsAdapter
             rvSymptoms.layoutManager = LinearLayoutManager(requireContext())
             symptomsViewModel.symptomsList.observe(viewLifecycleOwner) { symptoms ->
