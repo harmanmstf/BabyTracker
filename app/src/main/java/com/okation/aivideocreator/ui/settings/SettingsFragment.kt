@@ -43,11 +43,11 @@ class SettingsFragment : Fragment() {
             }
 
             btnPrivacy.setOnClickListener {
-                browseNeonSite()
+                browsePrivacy()
             }
 
             btnTerms.setOnClickListener {
-                browseNeonSite()
+                browseTerms()
             }
 
             btnContact.setOnClickListener {
@@ -65,11 +65,18 @@ class SettingsFragment : Fragment() {
         _binding = null
     }
 
-    private fun browseNeonSite() {
+    private fun browsePrivacy(){
         val webView: WebView = binding.webView
         webView.isVisible = true
         webView.webViewClient = WebViewClient()
-        webView.loadUrl("https://www.neonapps.co")
+        webView.loadUrl("https://policies.google.com/privacy?hl=en")
+    }
+
+    private fun browseTerms(){
+        val webView: WebView = binding.webView
+        webView.isVisible = true
+        webView.webViewClient = WebViewClient()
+        webView.loadUrl("https://policies.google.com/terms?hl=en")
     }
 
     private fun sendEmail() {

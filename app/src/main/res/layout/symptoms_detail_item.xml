@@ -28,18 +28,20 @@
 
         <ImageView
             android:id="@+id/imgSymptom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="90dp"
+            android:scaleType="fitCenter"
             android:layout_gravity="center"
             android:layout_marginTop="22dp"
-            tools:src="@drawable/img_nausea" />
+            tools:src="@drawable/img_rush" />
 
         <TextView
             android:id="@+id/tvSymptomsName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="12dp"
             android:textAppearance="@style/symptoms_name"
             tools:text="Nausea" />
 
