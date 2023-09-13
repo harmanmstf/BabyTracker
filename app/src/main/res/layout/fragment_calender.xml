@@ -63,6 +63,7 @@
         app:tabIndicatorColor="@color/main"
         app:tabMode="fixed"
         app:tabIndicator="@color/transparent"
+
         app:tabSelectedTextColor="@color/main"
         app:tabTextColor="@android:color/darker_gray">
 
@@ -96,8 +97,10 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
+        app:layout_constraintTop_toBottomOf="@id/tabLayout"
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

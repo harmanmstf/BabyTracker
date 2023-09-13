@@ -9,12 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import com.okation.aivideocreator.R
 import com.okation.aivideocreator.databinding.FragmentSettingsBinding
 import com.okation.aivideocreator.ui.inapp.PremiumViewModel
 
@@ -28,7 +25,7 @@ class SettingsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -85,7 +82,7 @@ class SettingsFragment : Fragment() {
 
         try {
             startActivity(Intent.createChooser(emailIntent, "Send email..."))
-        } catch (ex: android.content.ActivityNotFoundException) {
+        } catch (_: android.content.ActivityNotFoundException) {
         }
     }
 

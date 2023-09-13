@@ -8,8 +8,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.okation.aivideocreator.databinding.FeedingListItemBinding
-import com.okation.aivideocreator.model.SymptomsDetail
-import com.okation.aivideocreator.ui.symptoms.symptomsdetail.SymptomsDetailFragment
 
 
 class FeedingListAdapter(

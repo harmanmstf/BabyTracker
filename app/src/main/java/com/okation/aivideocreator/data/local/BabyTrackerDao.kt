@@ -5,7 +5,6 @@ import androidx.room.*
 import com.okation.aivideocreator.data.entities.Feeding
 import com.okation.aivideocreator.data.entities.Sleep
 import com.okation.aivideocreator.data.entities.Symptoms
-import kotlinx.coroutines.flow.Flow
 
 
 @Dao

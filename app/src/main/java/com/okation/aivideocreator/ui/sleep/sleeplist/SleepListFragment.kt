@@ -10,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.okation.aivideocreator.R
 import com.okation.aivideocreator.databinding.FragmentSleepListBinding
-import com.okation.aivideocreator.ui.feeding.feedinglist.FeedingListAdapter
 import com.okation.aivideocreator.ui.sleep.SleepViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,7 +25,7 @@ class SleepListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         _binding = FragmentSleepListBinding.inflate(inflater, container, false)
         return binding.root
     }

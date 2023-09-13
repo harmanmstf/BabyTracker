@@ -7,7 +7,6 @@ import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import com.okation.aivideocreator.data.repository.Repository
 import com.okation.aivideocreator.data.SymptomsDataSource
-import com.okation.aivideocreator.data.entities.Feeding
 import com.okation.aivideocreator.data.entities.Symptoms
 import com.okation.aivideocreator.model.SymptomsDetail
 import dagger.hilt.android.lifecycle.HiltViewModel

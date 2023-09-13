@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.okation.aivideocreator.R
@@ -35,12 +34,13 @@ class SymptomsFragment : Fragment() {
 
     private var symptomId: Int? = null
     private var isObservingSymptom: Boolean? = null
+    private lateinit var itemDate: String
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         _binding = FragmentSymptomsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -120,6 +120,7 @@ class SymptomsFragment : Fragment() {
                         tvSymptomsTime.text = symptom.time
                         etNote.text = Editable.Factory.getInstance().newEditable(symptom.note)
                         symptomId = symptom.id
+                        itemDate = symptom.date
                     }
                 }
             } else {
@@ -137,14 +138,13 @@ class SymptomsFragment : Fragment() {
             val time = tvSymptomsTime.text.toString()
             val symptoms = tvSymptoms.text.toString()
             val note = etNote.text.toString()
-            val dateFormat = SimpleDateFormat("E, MMM dd", Locale.getDefault())
-            val formattedDate = dateFormat.format(calendar.time)
+            val date = itemDate
             val id = symptomId
 
             loadingState = LoadingState(vLoading, progressBar, tvSaved, findNavController())
             loadingState.showLoadingState()
 
-            viewModel.updateSymptom(id!!, time, symptoms, note, formattedDate)
+            viewModel.updateSymptom(id!!, time, symptoms, note, date)
         }
     }
 

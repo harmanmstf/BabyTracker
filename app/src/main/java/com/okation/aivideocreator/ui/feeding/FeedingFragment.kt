@@ -34,12 +34,13 @@ class FeedingFragment : Fragment() {
 
     private var feedingId: Int? = null
     private var isObservingFeeding: Boolean? = null
+    private lateinit var itemDate: String
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         _binding = FragmentFeedingBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -97,6 +98,7 @@ class FeedingFragment : Fragment() {
                         tvFeedingTime.text = feeding.time
                         etNote.text = Editable.Factory.getInstance().newEditable(feeding.note)
                         feedingId = feeding.id
+                        itemDate = feeding.date
                     }
                 }
             } else {
@@ -114,14 +116,13 @@ class FeedingFragment : Fragment() {
             val time = tvFeedingTime.text.toString()
             val amount = etAmount.text.toString()
             val note = etNote.text.toString()
-            val dateFormat = SimpleDateFormat("E, MMM dd", Locale.getDefault())
-            val formattedDate = dateFormat.format(calendar.time)
+            val date = itemDate
             val id = feedingId
 
             loadingState = LoadingState(vLoading, progressBar, tvSaved, findNavController())
             loadingState.showLoadingState()
 
-            viewModel.updateFeeding(id!!, time, amount, note, formattedDate)
+            viewModel.updateFeeding(id!!, time, amount, note, date)
         }
     }
 

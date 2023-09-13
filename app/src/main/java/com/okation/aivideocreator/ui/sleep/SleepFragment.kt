@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.okation.aivideocreator.databinding.FragmentSleepBinding
@@ -34,12 +33,13 @@ class SleepFragment : Fragment() {
 
     private var sleepId: Int? = null
     private var isObservingSleep: Boolean? = null
+    private lateinit var itemDate: String
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         _binding = FragmentSleepBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -102,6 +102,7 @@ class SleepFragment : Fragment() {
                         tvWokeUp.text = sleep.wokeUpTime
                         etNote.text = Editable.Factory.getInstance().newEditable(sleep.note)
                         sleepId = sleep.id
+                        itemDate = sleep.date
                     }
                 }
             } else {
@@ -119,14 +120,13 @@ class SleepFragment : Fragment() {
             val fellSleep = tvFellSleep.text.toString()
             val wokeUp = tvWokeUp.text.toString()
             val note = etNote.text.toString()
-            val dateFormat = SimpleDateFormat("E, MMM dd", Locale.getDefault())
-            val formattedDate = dateFormat.format(calendar.time)
+            val date = itemDate
             val id = sleepId
 
             loadingState = LoadingState(vLoading, progressBar, tvSaved, findNavController())
             loadingState.showLoadingState()
 
-            viewModel.updateSleep(id!!, fellSleep, wokeUp, note, formattedDate)
+            viewModel.updateSleep(id!!, fellSleep, wokeUp, note, date)
         }
     }
 

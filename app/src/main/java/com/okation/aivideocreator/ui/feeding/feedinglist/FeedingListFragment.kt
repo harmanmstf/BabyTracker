@@ -25,7 +25,7 @@ class FeedingListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentFeedingListBinding.inflate(inflater, container, false)
         return binding.root
     }
