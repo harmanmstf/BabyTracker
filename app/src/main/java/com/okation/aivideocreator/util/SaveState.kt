@@ -10,11 +10,14 @@ class SaveState(
     private val firstInput: TextView,
     private val secondInput: TextView,
     private val saveButton: Button,
+    private val customAfterTextChanged: (Editable?) -> Unit = {}
 ) {
 
     val textWatcher = object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {
+            customAfterTextChanged(s)
             updateSaveButtonVisibility()
+
         }
 
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

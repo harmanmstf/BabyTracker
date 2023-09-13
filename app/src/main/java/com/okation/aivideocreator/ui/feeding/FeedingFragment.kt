@@ -2,6 +2,7 @@ package com.okation.aivideocreator.ui.feeding
 
 import android.os.Bundle
 import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -61,10 +62,15 @@ class FeedingFragment : Fragment() {
             }
 
             saveState = SaveState(tvFeedingTime, etAmount, btnSaveFeeding)
+
+            addSuffixToEditText()
+
+
+
+
             tvFeedingTime.addTextChangedListener(saveState.textWatcher)
             etAmount.addTextChangedListener(saveState.textWatcher)
 
-            tvMl.isVisible = !etAmount.text.isNullOrEmpty()
 
             viewModel.isObservingFeeding.observe(viewLifecycleOwner) { isObserving ->
                 isObservingFeeding = isObserving
@@ -139,5 +145,19 @@ class FeedingFragment : Fragment() {
             loadingState = LoadingState(vLoading, progressBar, tvSaved, findNavController())
             loadingState.showLoadingState()
         }
+    }
+
+    private fun addSuffixToEditText() {
+        binding.apply {
+            etAmount.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+                if (!hasFocus) {
+                    val text = etAmount.text.toString()
+                    if (!text.endsWith("ml")) {
+                        etAmount.setText("$text ml")
+                    }
+                }
+            }
+        }
+
     }
 }

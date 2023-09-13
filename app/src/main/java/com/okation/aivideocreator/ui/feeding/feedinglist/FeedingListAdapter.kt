@@ -36,7 +36,7 @@ class FeedingListAdapter(
         @SuppressLint("SetTextI18n")
         fun bind(feeding: Feeding) {
             binding.tvTime.text = "Time: ${feeding.time}"
-            binding.tvAmount.text = "Amount: ${feeding.amount} ml"
+            binding.tvAmount.text = "Amount: ${feeding.amount}"
             binding.tvNote.text = "Note: ${feeding.note}"
         }
     }
