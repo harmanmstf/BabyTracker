@@ -51,6 +51,7 @@
     <string name="note_template">note: %1$s</string>
     <string name="tue_feb_12">Tue, Feb 12</string>
     <string name="ml">ml</string>
+    <string name="all">All</string>
 
 
 </resources>

@@ -48,13 +48,14 @@ class SymptomsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         binding.apply {
 
             btnBack.setOnClickListener {
                 viewModel.setIsObservingSymptom(false)
                 findNavController().navigateUp()
-               // viewModel.clearSymptomsAndTime()
-
+                //viewModel.clearSymptomsAndTime()
+                viewModel.clearSymptomsSelection()
             }
 
             vSymptoms.setOnClickListener {
@@ -85,7 +86,9 @@ class SymptomsFragment : Fragment() {
                     updateSymptomItem()
                 }
                 viewModel.setIsObservingSymptom(false)
-               // viewModel.clearSymptomsAndTime()
+                // viewModel.clearSymptomsAndTime()
+                viewModel.clearSymptomsSelection()
+
 
             }
 
@@ -145,6 +148,8 @@ class SymptomsFragment : Fragment() {
             loadingState.showLoadingState()
 
             viewModel.updateSymptom(id!!, time, symptoms, note, date)
+
+
         }
     }
 
@@ -160,6 +165,15 @@ class SymptomsFragment : Fragment() {
 
             loadingState = LoadingState(vLoading, progressBar, tvSaved, findNavController())
             loadingState.showLoadingState()
+
+
+        }
+    }
+
+    private fun clear() {
+        if(symptomId ==null){
+            binding.tvSymptomsTime.text = ""
+            binding.tvSymptoms.text = ""
         }
     }
 }

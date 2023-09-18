@@ -31,6 +31,17 @@ class SymptomsViewModel @Inject constructor(
         }
     }
 
+    fun clearSymptomsSelection() {
+        val currentSymptoms = _symptoms.value ?: return
+
+        val updatedSymptoms = currentSymptoms.map { it.copy(isSelected = false) }
+
+        _symptoms.value = updatedSymptoms
+        _selectedTime.value = ""
+    }
+
+
+
     fun clearSymptomsAndTime() {
         _symptoms.value = emptyList()
         _selectedTime.value = ""

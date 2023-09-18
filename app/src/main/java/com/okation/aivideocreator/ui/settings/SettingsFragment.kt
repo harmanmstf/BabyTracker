@@ -44,14 +44,17 @@ class SettingsFragment : Fragment() {
 
             btnPrivacy.setOnClickListener {
                 browsePrivacy()
+                btnGetPremium.isVisible = false
             }
 
             btnTerms.setOnClickListener {
                 browseTerms()
+                btnGetPremium.isVisible = false
             }
 
             btnContact.setOnClickListener {
                 sendEmail()
+
             }
 
             btnRate.setOnClickListener {
